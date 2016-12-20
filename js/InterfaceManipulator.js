@@ -12,7 +12,7 @@ class InterfaceManipulator {
     localInitSettings() {
         var t = this;
         t.controlDefinition();
-        t.getStructureEntity();
+        t.userInputObtained();
         t.fillProvisoryClassArray();
     }
 
@@ -29,14 +29,25 @@ class InterfaceManipulator {
         t.entitySubmit = $('.js_sumbit_new_element');
         t.classSubmit = $('.js_class-button');
     }
-    
+
+
+    usetInputObtained() {
+        var t = this;
+        var result = null;
+        t.entitySubmit.on('click', function () {
+          eventDirector.userInteraction();
+        });
+        return result;
+      }
+
+
     fillProvisoryClassArray(){
         var t = this;
         t.classSubmit.on('click',function () {
             var newProvisoryClass = t.classControl.val();
             t.provisoryClassArray.push(newProvisoryClass);
         });
-    }
+      }
 
     provisoryClassArrayIteration(targetedArray){
         var t = this;
@@ -51,22 +62,22 @@ class InterfaceManipulator {
         return structureEntityName;
     }
 
-    getStructureEntity() {
-        var t = this;
-        t.entitySubmit.on('click', function () {
-            var newStructureEntity = new StructureEntity();
-            newStructureEntity.setUniqueName(t.getStructureEntityName());
-            newStructureEntity.setcoreID(1);
-            newStructureEntity.setVersionID(t.getVersionRelease());
-            t.provisoryClassArrayIteration(newStructureEntity.classArray);
-            newStructureEntity.pushToAttrMap(1,'aireemDA');
-            newStructureEntity.setMotherStructure('mama');
 
-            stateManager.nextVersion();
-
-            console.log(newStructureEntity);
-            console.log(newStructureEntity.getSingleMapAttr(1))
-            console.log(newStructureEntity.getAllSingleMapAttrPairs());
-        });
+    getUserData(){
+      var newStructureEntity = new StructureEntity();
+      newStructureEntity.setUniqueName(t.getStructureEntityName());
+      newStructureEntity.setcoreID(1);
+      newStructureEntity.setVersionID(t.getVersionRelease());
+      t.provisoryClassArrayIteration(newStructureEntity.classArray);
+      newStructureEntity.pushToAttrMap(1,'aireemDA');
+      newStructureEntity.setMotherStructure('mama');
+      result = newStructureEntity;
+      console.log(newStructureEntity);
+      console.log(newStructureEntity.getSingleMapAttr(1))
+      console.log(newStructureEntity.getAllSingleMapAttrPairs());
     }
+
+
+
+
 }
