@@ -1,0 +1,74 @@
+@screen-sm-min: 768px;
+
+.main
+{
+  width: 800px;
+  height: 200px;
+  background-color: #d9edf7;
+}
+
+.levy, .pravy
+ {
+   width:  50%;
+   height: 100px;
+   background-color: #00b3ee;
+   float:left;
+  padding: 25px;
+// box-sizing: content-box;
+  box-sizing: border-box;
+
+  h3
+  {
+    text-shadow: 2px 2px 4px grey;
+  }
+ }
+
+.pravy
+{
+  background-color: #1b6d85;
+}
+
+
+.tabulka
+{
+  margin-top: 60px ;
+
+
+
+
+  tr td:nth-child(4),  tr td:nth-child(2),  tr td:nth-child(3),  tr td:nth-child(1)
+  {
+    width: 80px;
+  }
+
+  input
+  {
+    height: 20px;
+  }
+
+
+}
+
+.pagination
+{
+  margin: 0;
+}
+
+.pagination_buttons button
+{
+  background-color: white;
+  color: gray;
+}
+
+
+
+
+@media (max-width:@screen-sm-min)
+{
+  .paginator
+  {
+   padding-bottom: -20px;
+  }
+}
+
+
