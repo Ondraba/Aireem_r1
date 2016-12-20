@@ -1,0 +1,83 @@
+/**
+ * Created by oba on 20.12.2016.
+ */
+class StructureEntity {
+    constructor() {
+        this.uniqueName = '';
+        this.coreID = null;
+        this.versionID = null;
+        this.classArray = [];
+        this.attrMap = new Map();
+        this.motherStructure = null;
+    }
+
+    //getters
+    getUniqeName() {
+        return this.uniqueName;
+    }
+
+    getCoreID() {
+        return this.coreID;
+    }
+
+    getVersionID() {
+        return this.versionID;
+    }
+
+    getSingleClassArrayItem(index) {
+        return this.classArray[index];
+    }
+
+    getWholeClassArray(){
+        return this.classArray;
+    }
+
+    getSingleMapAttr(key){
+        return this.attrMap.get(key);
+    }
+
+    getAllSingleMapAttrPairs(){
+        var t = this;
+        for (var [key, value] of t.attrMap.entries()) {
+            console.log(key + " = " + value);
+        }
+    }
+
+
+    getWholeAttrMap(){
+        return this.attrMap;
+    }
+
+    getMother(index) {
+        return this.mother;
+    }
+    //getters
+
+
+    //setters
+    setUniqueName(uniqueName) {
+       this.uniqueName = uniqueName;
+    }
+
+    setcoreID(coreID) {
+        this.coreID = coreID;
+    }
+
+    setVersionID(versionID) {
+        this.versionID = versionID;
+    }
+
+    pushToClassArray(item) {
+       this.classArray.push(item);
+    }
+
+    pushToAttrMap(key, value) {
+        this.attrMap.set(key, value);
+    }
+
+    setMotherStructure(motherStructure) {
+        this.motherStructure = motherStructure;
+    }
+    //setters
+
+}
