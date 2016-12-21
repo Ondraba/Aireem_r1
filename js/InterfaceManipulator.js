@@ -2,8 +2,10 @@ class InterfaceManipulator {
     constructor() {
         this.nameControl = null;
         this.classControl = null;
-        this.entitySubmit = null;
         this.classSubmit = null;
+        this.motherControl = null;
+        this.userInteractionTrigger = null;
+
         this.provisoryClassArray = [];
 
         this.localInitSettings();
@@ -26,15 +28,16 @@ class InterfaceManipulator {
         var t = this;
         t.nameControl = $('.js_name-input');
         t.classControl = $('.js_class-input');
-        t.entitySubmit = $('.js_sumbit_new_element');
         t.classSubmit = $('.js_class-button');
+        t.motherControl = $('js_input-mother-select-list');
+        t.userInteractionTrigger  = $('.js_sumbit_new_element');
     }
 
 
-    usetInputObtained() {
+    userInputObtained() {
         var t = this;
         var result = null;
-        t.entitySubmit.on('click', function () {
+        t.userInteractionTrigger.on('click', function () {
           eventDirector.userInteraction();
         });
         return result;
@@ -72,6 +75,7 @@ class InterfaceManipulator {
       newStructureEntity.pushToAttrMap(1,'aireemDA');
       newStructureEntity.setMotherStructure('mama');
       result = newStructureEntity;
+      return result;
       console.log(newStructureEntity);
       console.log(newStructureEntity.getSingleMapAttr(1))
       console.log(newStructureEntity.getAllSingleMapAttrPairs());

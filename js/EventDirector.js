@@ -7,6 +7,7 @@ class EventDirector {
 
     userInteraction() {
       var t = this;
+      stateManager.nextVersion();
       t.getNewStructureEntity();
       t.saveNewStructureEntity();
     }

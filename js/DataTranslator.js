@@ -17,4 +17,10 @@ class DataTranslator {
       var t = this;
       t.coreStructureHolder.push(item);
     }
+
+    startTheReconstruction(){
+      var t = this;
+      for(let value of t.coreStructureHolder){
+        
+    }
 }
