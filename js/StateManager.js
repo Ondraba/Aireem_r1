@@ -20,21 +20,21 @@ class StateManager {
         t.currentVersion = 0;
     }
 
-    uniqueIdentifierInc(){
+    getUniqueIntentifier(){
       var t = this;
-      var result = t.uniqueIdentifier++;
-      return result;
+      return t.uniqueIdentifier;
     }
+
 
     uniqueIdentifierInc(){
       var t = this;
       t.uniqueIdentifier++;
-      return t.uniqueIdentifier;
     }
 
     uniqueIdentifierDec(){
       var t = this;
       t.uniqueIdentifier--;
-      return t.uniqueIdentifier;
     }
+
+
 }

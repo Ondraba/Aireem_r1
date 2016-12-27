@@ -1,6 +1,7 @@
 class DataTranslator {
     constructor() {
      this.coreStructureHolder = [];
+     this.editActivation();
     }
 
     getCoreStructureHolder() {
@@ -18,9 +19,54 @@ class DataTranslator {
       t.coreStructureHolder.push(item);
     }
 
-    startTheReconstruction(){
+
+
+    rerenderPreview(){
       var t = this;
-      for(let value of t.coreStructureHolder){
-        
+      interfaceManipulator.clearPreviewArea();
+      for(let item of t.coreStructureHolder){
+        var newPreviewElement = $(document.createElement('div'));
+        newPreviewElement.attr('coreid', item.getCoreID());
+        newPreviewElement.attr('id',item.getUniqeName());
+        newPreviewElement.attr('versionID',item.getVersionID());
+        if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
+        newPreviewElement.addClass('standardDiv');
+        }
+        else{
+        newPreviewElement.addClass('innerDiv');
+        }
+
+        $(item.getMotherSelector()).append(newPreviewElement);
+        console.log(item.getMotherSelector());
+      }
     }
+
+    editActivation(){
+      var t = this;
+      $(document).on('click','.standardDiv',function (){
+          for(var i = 0; i < t.coreStructureHolder.length; i++){
+              if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
+                t.rerenderEditPanel(t.coreStructureHolder[i]);
+                console.log('yes' + t.coreStructureHolder[i].getVersionID());
+              }
+            }
+      });
+    }
+
+    rerenderEditPanel(coreElementToEdit){
+
+      var t = this;
+      interfaceManipulator.clearEditArea();
+      for(let item of coreElementToEdit.classArray){
+        console.log('edituji');
+        var newEditPropsPanel = $(document.createElement('div'));
+        var newEditPropsPanelText = $(document.createElement('span'));
+        newEditPropsPanel.attr('versionID',coreElementToEdit.getVersionID());
+        newEditPropsPanel.addClass('standard-favourite-box');
+        newEditPropsPanelText.text(item);
+        newEditPropsPanel.append(newEditPropsPanelText);
+        $('.element-review').append(newEditPropsPanel);
+      }
+    }
+
 }

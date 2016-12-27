@@ -20,6 +20,12 @@ class StructureEntity {
         return this.coreID;
     }
 
+    getCoreIDSelector(){
+      var t = this;
+      var coreIDSelector = ('#' + t.getCoreID());
+      return coreIDSelector;
+    }
+
     getVersionID() {
         return this.versionID;
     }
@@ -48,8 +54,14 @@ class StructureEntity {
         return this.attrMap;
     }
 
-    getMother(index) {
-        return this.mother;
+    getMotherStructure() {
+        return this.motherStructure;
+    }
+
+    getMotherSelector(){
+      var t = this;
+      var motherSelector = ('#' + t.getMotherStructure());
+      return motherSelector;
     }
     //getters
 
