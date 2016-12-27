@@ -2,6 +2,7 @@ class DataTranslator {
     constructor() {
      this.coreStructureHolder = [];
      this.editActivation();
+     this.editConfirm();
     }
 
     getCoreStructureHolder() {
@@ -67,6 +68,24 @@ class DataTranslator {
         newEditPropsPanel.append(newEditPropsPanelText);
         $('.element-review').append(newEditPropsPanel);
       }
+    }
+
+    editConfirm(){
+      var t = this;
+        $(document).on('click','.standard-favourite-box',function (){
+          for(var i = 0; i < t.coreStructureHolder.length; i++){
+              if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
+                for(var x = 0; x < t.coreStructureHolder[i].classArray.length; x++){
+                  if( t.coreStructureHolder[i].classArray[x] == $(this).children('span').text()){
+                  t.coreStructureHolder[i].classArray.splice(x,1);
+                  t.rerenderEditPanel(t.coreStructureHolder[i]);
+                  }
+                }
+                // t.rerenderEditPanel(t.coreStructureHolder[i]);
+                // console.log('yes' + t.coreStructureHolder[i].getVersionID());
+              }
+            }
+      });
     }
 
 }
