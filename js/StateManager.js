@@ -2,6 +2,12 @@ class StateManager {
     constructor() {
         this.currentVersion = 0;
         this.uniqueIdentifier = 0;
+        this.editState = false;
+    }
+
+    getCurrentState(){
+      var t = this;
+      return t.editState;
     }
 
     getCurrentVersion(){

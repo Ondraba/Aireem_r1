@@ -2,12 +2,28 @@ class EditPanelUI{
   constructor() {
         this.localEditsPanelOptions = null;
         this.editPanelMain = null;
+        this.stateManager = stateManager;
     }
 
   editPanelAreas(){
     var t = this;
     t.editPanelMain = $('.edit-panel-main');
   }
+
+
+  editActivation(){
+    var t = this;
+    $(document).on('click','.standardDiv',function (){
+        for(var i = 0; i < t.coreStructureHolder.length; i++){
+            if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
+              t.stateManager.setStateToEditMode();
+              t.rerenderEditMain(t.coreStructureHolder[i]);
+              console.log('yes' + t.coreStructureHolder[i].getVersionID());
+            }
+          }
+    });
+  }
+
 
   rerenderEditMain(coreElementToEdit){
 
