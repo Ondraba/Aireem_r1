@@ -1,6 +1,8 @@
 class DataTranslator {
     constructor() {
-     this.coreStructureHolder = [];
+     this.coreStructureHolder = []; //holds core structure of CONFIRMED data structures from user
+     this.provisoryClassHolder = []; //holds provisory UNCONFIRMED class properties from user
+
      this.editActivation();
      this.editConfirm();
     }
@@ -47,28 +49,13 @@ class DataTranslator {
       $(document).on('click','.standardDiv',function (){
           for(var i = 0; i < t.coreStructureHolder.length; i++){
               if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
-                t.rerenderEditPanel(t.coreStructureHolder[i]);
+                editPanelUI.rerenderEditMain(t.coreStructureHolder[i]);
                 console.log('yes' + t.coreStructureHolder[i].getVersionID());
               }
             }
       });
     }
 
-    rerenderEditPanel(coreElementToEdit){
-
-      var t = this;
-      interfaceManipulator.clearEditArea();
-      for(let item of coreElementToEdit.classArray){
-        console.log('edituji');
-        var newEditPropsPanel = $(document.createElement('div'));
-        var newEditPropsPanelText = $(document.createElement('span'));
-        newEditPropsPanel.attr('versionID',coreElementToEdit.getVersionID());
-        newEditPropsPanel.addClass('standard-favourite-box');
-        newEditPropsPanelText.text(item);
-        newEditPropsPanel.append(newEditPropsPanelText);
-        $('.element-review').append(newEditPropsPanel);
-      }
-    }
 
     editConfirm(){
       var t = this;
@@ -78,7 +65,7 @@ class DataTranslator {
                 for(var x = 0; x < t.coreStructureHolder[i].classArray.length; x++){
                   if( t.coreStructureHolder[i].classArray[x] == $(this).children('span').text()){
                   t.coreStructureHolder[i].classArray.splice(x,1);
-                  t.rerenderEditPanel(t.coreStructureHolder[i]);
+                  editPanelUI.rerenderEditMain(t.coreStructureHolder[i]);
                   }
                 }
                 // t.rerenderEditPanel(t.coreStructureHolder[i]);

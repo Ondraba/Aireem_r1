@@ -79,6 +79,13 @@
 
 										<div class='col-sm-12'>
 											<hr />
+
+											<div class='edit-panel-main'>
+												<div class='row'>
+
+												</div>
+											</div>
+
 											<div class='favourites-area'>
 												<div class='row'>
 
@@ -108,19 +115,21 @@
 
 <script src="js/jquery-3.1.1.min.js"></script>
 
-<script src="js/AppOptions.js"></script>
+<!-- <script src="js/AppOptions.js"></script> -->
+<script src="js/PropsPanelOptions.js"></script>
 <script src="js/LayoutBuilderOptions.js"></script>
 <script src="js/Helpers.js"></script>
 <script src="js/DataTranslator.js"></script>
 <script src="js/EventDirector.js"></script>
 <script src="js/InterfaceManipulator.js"></script>
 <script src="js/PropsPanelUI.js"></script>
-<script src="js/PreviewPanelUI.js"></script>
-<script src="js/ControlPanelUI.js"></script>
+<script src="js/EditPanelUI.js"></script>
+<!-- <script src="js/PreviewPanelUI.js"></script>
+<script src="js/ControlPanelUI.js"></script> -->
 <script src="js/StructureEntity.js"></script>
 <script src="js/StateManager.js"></script>
 <script>
-	var appOptionsInstance = new AppOptions();
+	var propsPanelOptions = new PropsPanelOptions();
  	var helpersInstnace = new Helpers();
 	var layoutBuilderOptions = new LayoutBuilderOptions();
 	var dataTranslator = new DataTranslator();
@@ -128,8 +137,9 @@
 	var stateManager = new StateManager();
   var interfaceManipulator = new InterfaceManipulator();
 	var propsPanelUI = new PropsPanelUI();
-  var controlPanelUI = new ControlPanelUI();
-	var previewPanelUI = new PreviewPanelUI();
+	var editPanelUI = new EditPanelUI();
+  // var controlPanelUI = new ControlPanelUI();
+	// var previewPanelUI = new PreviewPanelUI();
 	var structureEntity = new StructureEntity();
 </script>
 

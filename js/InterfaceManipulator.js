@@ -45,7 +45,7 @@ class InterfaceManipulator {
 
 
     clearEditArea(){
-      $('.element-review').empty();
+      $('.edit-panel-main').empty();
     }
 
     fillTheLists(selectList, newOption){
