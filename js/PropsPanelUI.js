@@ -1,17 +1,36 @@
 class PropsPanelUI{
     constructor() {
+        //options
         this.localPropsPanelOptions = propsPanelOptions;
-        this.propsPanelMain = null;
-          this.propsPanelAreas();
+
+        //cross class instances
+        this.dataTranslator = dataTranslator;
+        this.stateManager = stateManager;
         this.favourites = propsPanelOptions.getPropsPanelOptions().creativeArea.favourites;
-        this.fillPropsPanel();
+
+        //constructed areas
+        this.propsPanelMain = null;
+
+        //constructed controlls
+        this.propsManipulator = null;
+
+        //init methods and listeners
+        this.propsInit();
     }
 
+   propsInit(){
+     var t = this;
+     t.propsPanelAreas();
+     t.fillPropsPanel();
+     t.propsPanelReaction();
+   }
 
   propsPanelAreas(){
     var t = this;
+    //areas
     t.propsPanelMain = $('.favourites-area');
-
+    //controlls
+    t.propsManipulator = ".standard-props-box";
   }
 
   fillPropsPanel(){
@@ -36,9 +55,20 @@ class PropsPanelUI{
   }
 
   propsPanelReaction(){
-      $(document).on('click','.standard-props-box',function () {
-        console.log('render provisory buttons');
-      });
+        var t = this;
+        $(document).on('click',t.propsManipulator,function (){
+          var editModeState = t.stateManager.getCurrentEditModeState();
+          console.log('klik');
+            if(editModeState == null){
+              throw new Error('There is some error in State Manager processing.');
+            }
+            else if (editModeState == false) {
+              t.dataTranslator.setItemToProvisoryClassHolder($(this).children('span').text());
+            }
+
+            else{
+            }
+        });
   }
 
 }

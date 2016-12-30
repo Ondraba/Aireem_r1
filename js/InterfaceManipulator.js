@@ -8,6 +8,8 @@ class InterfaceManipulator {
 
         this.provisoryClassArray = [];
 
+        this.dataTranslator = dataTranslator;
+
         this.localInitSettings();
     }
 
@@ -83,12 +85,6 @@ class InterfaceManipulator {
           t.provisoryClassArray.splice(0);
       }
 
-    provisoryClassArrayIteration(targetedArray){
-        var t = this;
-        for(let value of t.provisoryClassArray){
-            targetedArray.push(value);
-        }
-    }
 //provisory class aray area
 
     getStructureEntityName() {
@@ -104,14 +100,13 @@ class InterfaceManipulator {
     }
 
 
-
     getUserData(){
       var t = this;
       var newStructureEntity = new StructureEntity();
       newStructureEntity.setUniqueName(t.getStructureEntityName());
       newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
-      t.provisoryClassArrayIteration(newStructureEntity.classArray);
+      t.dataTranslator.provisoryToCoreSwap();
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
       newStructureEntity.setMotherStructure(t.getMotherName());
       return newStructureEntity;

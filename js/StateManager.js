@@ -2,12 +2,22 @@ class StateManager {
     constructor() {
         this.currentVersion = 0;
         this.uniqueIdentifier = 0;
-        this.editState = false;
+        this.editMode = false;
     }
 
-    getCurrentState(){
+    getCurrentEditModeState(){
       var t = this;
-      return t.editState;
+      return t.editMode;
+    }
+
+    setEditMode(){
+       var t = this;
+       t.editMode = true;
+    }
+
+    disableEditMode(){
+      var t = this;
+      t.editMode = false;
     }
 
     getCurrentVersion(){

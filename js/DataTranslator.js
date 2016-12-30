@@ -2,9 +2,6 @@ class DataTranslator {
     constructor() {
      this.coreStructureHolder = []; //holds core structure of CONFIRMED data structures from user
      this.provisoryClassHolder = []; //holds provisory UNCONFIRMED class properties from user
-
-     this.editActivation();
-     this.editConfirm();
     }
 
     getCoreStructureHolder() {
@@ -21,6 +18,30 @@ class DataTranslator {
       var t = this;
       t.coreStructureHolder.push(item);
     }
+
+    getProvisoryClassHolder() {
+     var t = this;
+     return t.provisoryClassHolder;
+    }
+
+    getProvisoryClassHolderItem(index){
+      var t = this;
+      return t.provisoryClassHolder[index];
+    }
+
+    setItemToProvisoryClassHolder(item){
+      var t = this;
+      t.provisoryClassHolder.push(item);
+    }
+
+
+    provisoryToCoreSwap(){
+          var t = this;
+          for(let value of t.provisoryClassHolder){
+              t.setItemToCoreStructureHolder(value);
+          }
+    }
+
 
 
 
@@ -43,36 +64,4 @@ class DataTranslator {
         console.log(item.getMotherSelector());
       }
     }
-
-    editActivation(){
-      var t = this;
-      $(document).on('click','.standardDiv',function (){
-          for(var i = 0; i < t.coreStructureHolder.length; i++){
-              if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
-                editPanelUI.rerenderEditMain(t.coreStructureHolder[i]);
-                console.log('yes' + t.coreStructureHolder[i].getVersionID());
-              }
-            }
-      });
-    }
-
-
-    editConfirm(){
-      var t = this;
-        $(document).on('click','.standard-favourite-box',function (){
-          for(var i = 0; i < t.coreStructureHolder.length; i++){
-              if (t.coreStructureHolder[i].getVersionID() == $(this).attr('versionID')){
-                for(var x = 0; x < t.coreStructureHolder[i].classArray.length; x++){
-                  if( t.coreStructureHolder[i].classArray[x] == $(this).children('span').text()){
-                  t.coreStructureHolder[i].classArray.splice(x,1);
-                  editPanelUI.rerenderEditMain(t.coreStructureHolder[i]);
-                  }
-                }
-                // t.rerenderEditPanel(t.coreStructureHolder[i]);
-                // console.log('yes' + t.coreStructureHolder[i].getVersionID());
-              }
-            }
-      });
-    }
-
 }
