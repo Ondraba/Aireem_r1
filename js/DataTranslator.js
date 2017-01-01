@@ -35,10 +35,10 @@ class DataTranslator {
     }
 
 
-    provisoryToCoreSwap(){
+    provisoryToCoreSwap(coreStructureArray){
           var t = this;
           for(let value of t.provisoryClassHolder){
-              t.setItemToCoreStructureHolder(value);
+              coreStructureArray.push(value);
           }
     }
 
@@ -49,10 +49,19 @@ class DataTranslator {
       var t = this;
       interfaceManipulator.clearPreviewArea();
       for(let item of t.coreStructureHolder){
+        console.log('item', item);
         var newPreviewElement = $(document.createElement('div'));
         newPreviewElement.attr('coreid', item.getCoreID());
         newPreviewElement.attr('id',item.getUniqeName());
         newPreviewElement.attr('versionID',item.getVersionID());
+        for(let itemClass of item.classArray){
+          if(item.classArray.length != 0){
+          newPreviewElement.addClass(itemClass);
+          }
+          else{
+            console.log('LOG: No class item in core structure element class array');
+          }
+        }
         if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
         newPreviewElement.addClass('standardDiv');
         }

@@ -75,14 +75,14 @@ class InterfaceManipulator {
         var t = this;
         t.classSubmit.on('click',function () {
             var newProvisoryClass = t.classControl.val();
-            t.provisoryClassArray.push(newProvisoryClass);
+            t.dataTranslator.provisoryClassHolder.push(newProvisoryClass);
         });
       }
 
       clearProvisoryClassArray(){
           var t = this;
-          var arrayToClear = t.provisoryClassArray;
-          t.provisoryClassArray.splice(0);
+          var arrayToClear = t.dataTranslator.provisoryClassHolder;
+          arrayToClear.splice(0);
       }
 
 //provisory class aray area
@@ -106,7 +106,7 @@ class InterfaceManipulator {
       newStructureEntity.setUniqueName(t.getStructureEntityName());
       newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
-      t.dataTranslator.provisoryToCoreSwap();
+      t.dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray);
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
       newStructureEntity.setMotherStructure(t.getMotherName());
       return newStructureEntity;
