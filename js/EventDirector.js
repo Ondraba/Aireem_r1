@@ -8,7 +8,7 @@ class EventDirector {
       var t = this;
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
-      t.getNewStructureEntity();
+      interfaceManipulator.newVsEdit();
       t.saveNewStructureEntity();
       t.setNewMotherElement();
       dataTranslator.rerenderPreview();
