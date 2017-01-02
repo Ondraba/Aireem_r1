@@ -37,10 +37,10 @@ class DataTranslator {
 
     provisoryToCoreSwap(coreStructureArray){
           var t = this;
-          for(let value of t.provisoryClassHolder){
-              coreStructureArray.push(value);
+          for (let item of t.provisoryClassHolder){
+            coreStructureArray.push(item);
           }
-    }
+      }
 
   clearProvisoryClassArray(){
           var t = this;

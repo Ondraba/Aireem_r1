@@ -1,12 +1,10 @@
 class PropsPanelUI{
     constructor() {
         //options
-        this.localPropsPanelOptions = propsPanelOptions;
+        this.localOptions = propsPanelOptions;
 
-        //cross class instances
-        this.dataTranslator = dataTranslator;
-        this.stateManager = stateManager;
-        this.favourites = propsPanelOptions.getPropsPanelOptions().creativeArea.favourites;
+        //cross class legacy
+        this.favourites = this.localOptions.getPropsPanelOptions().creativeArea.favourites;
 
         //constructed areas
         this.propsPanelMain = null;
@@ -56,7 +54,7 @@ class PropsPanelUI{
 
   fillPropsPanel(){
       var t = this;
-      var activeProps = t.localPropsPanelOptions.getActiveProps();
+      var activeProps = t.localOptions.getActiveProps();
       if (activeProps.length != 0){
       for(let secondLevelObj of activeProps){
           if (t.favourites[secondLevelObj].length != 0){
@@ -75,7 +73,7 @@ class PropsPanelUI{
         var t = this;
         $(document).on('click',t.propsManipulator,function (){
           var propertyValue = $(this).children('span').text();
-          var editModeState = t.stateManager.getCurrentEditModeState();
+          var editModeState = stateManager.getCurrentEditModeState();
           console.log('klik');
             if(editModeState == null){
               throw new Error('There is some error in State Manager processing.');
@@ -84,7 +82,7 @@ class PropsPanelUI{
               t.propertySelected(propertyValue, 'Before confirm version release.');
             }
             else{
-              t.propertySelected(propertyValue,t.stateManager.getGlobalVersionRelease());
+              t.propertySelected(propertyValue, stateManager.getGlobalVersionRelease());
             }
         });
   }
@@ -92,12 +90,12 @@ class PropsPanelUI{
   customPropsPanelReaction(){
     var t = this;
     $(document).on('click',t.customPropsManipulator,function (){
-      var customPropsElement =  $(this);
       var propertyValue = $(this).children('span').text();
-      var editModeState = t.stateManager.getCurrentEditModeState();
-      for(var i = 0; i < t.dataTranslator.provisoryClassHolder.length; i++){
-        if (t.dataTranslator.provisoryClassHolder[i] == propertyValue){
-          t.dataTranslator.provisoryClassHolder.splice(i,1);
+      var editModeState = stateManager.getCurrentEditModeState();
+      for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
+        if (dataTranslator.provisoryClassHolder[i] == propertyValue){
+          dataTranslator.provisoryClassHolder.splice(i,1);
+          t.rerenderCustomProps();
         }
         else{
           throw new Error('There is something wrong between provisoryClassHolder and UI.');
@@ -109,7 +107,7 @@ class PropsPanelUI{
 
   propertySelected(propertyValue, version){
     var t = this;
-    t.dataTranslator.setItemToProvisoryClassHolder(propertyValue);
+    dataTranslator.setItemToProvisoryClassHolder(propertyValue);
     t.rerenderByNewProperty(version);
   }
 
@@ -121,8 +119,21 @@ class PropsPanelUI{
   rerenderByNewProperty(version){
     var t = this;
     t.customPropertyAreaClear();
-    for(let item of t.dataTranslator.provisoryClassHolder){
-      t.newPropertyHTML(t.customPropsPanel, 'none', item, t.dataTranslator.provisoryClassHolder, t.customPropsManipulator, version);
+    for(let item of dataTranslator.provisoryClassHolder){
+      t.newPropertyHTML(t.customPropsPanel, 'none', item, dataTranslator.provisoryClassHolder, t.customPropsManipulator, version);
+    }
+  }
+
+  rerenderCustomProps(){
+    var t = this;
+    t.customPropertyAreaClear();
+    var newCustomPropsPanel = $(document.createElement('div'));
+    var newCustomPropsPanelText = $(document.createElement('span'));
+      for(var i = 0; i < dataTranslator.provisoryClassHolder.lenght; i++){
+        newCustomPropsPanel.addClass(t.customPropsManipulator);
+        newCustomPropsPanelText.text(i);
+        newCustomPropsPanel.append(newCustomPropsPanelText);
+        t.customPropsPanel.append(newCustomPropsPanel);
     }
   }
 

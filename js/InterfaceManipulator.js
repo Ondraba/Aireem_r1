@@ -8,8 +8,6 @@ class InterfaceManipulator {
 
         this.provisoryClassArray = [];
 
-        this.dataTranslator = dataTranslator;
-
         this.localInitSettings();
     }
 
@@ -75,13 +73,14 @@ class InterfaceManipulator {
         var t = this;
         t.classSubmit.on('click',function () {
             var newProvisoryClass = t.classControl.val();
-            t.dataTranslator.provisoryClassHolder.push(newProvisoryClass);
+            dataTranslator.setItemToProvisoryClassHolder(newProvisoryClass);
+            propsPanelUI.rerenderCustomProps();
         });
       }
 
       clearProvisoryClassArray(){
           var t = this;
-          var arrayToClear = t.dataTranslator.provisoryClassHolder;
+          var arrayToClear = dataTranslator.provisoryClassHolder;
           arrayToClear.splice(0);
       }
 
@@ -99,6 +98,15 @@ class InterfaceManipulator {
       return mothersName;
     }
 
+    newVsEdit(){
+      if(stateManager.getCurrentEditModeState == true){
+        t.getUserData();
+      }
+      else{
+        t.editUserData();
+      }
+    }
+
 
     getUserData(){
       var t = this;
@@ -106,7 +114,7 @@ class InterfaceManipulator {
       newStructureEntity.setUniqueName(t.getStructureEntityName());
       newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
-      t.dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray);
+      dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray);
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
       newStructureEntity.setMotherStructure(t.getMotherName());
       return newStructureEntity;

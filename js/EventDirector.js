@@ -1,18 +1,17 @@
 class EventDirector {
     constructor() {
      this.activeVersionUserData = null;
-     this.dataTranslator = dataTranslator;
-     this.stateManager = stateManager;
     }
+
 
     userInteraction() {
       var t = this;
-      t.stateManager.nextVersion();
-      t.stateManager.uniqueIdentifierInc();
+      stateManager.nextVersion();
+      stateManager.uniqueIdentifierInc();
       t.getNewStructureEntity();
       t.saveNewStructureEntity();
       t.setNewMotherElement();
-      t.dataTranslator.rerenderPreview();
+      dataTranslator.rerenderPreview();
       t.clearProvisoryData();
     }
 
@@ -28,7 +27,8 @@ class EventDirector {
 
     clearProvisoryData(){
       var t = this;
-      t.dataTranslator.clearProvisoryClassArray();
+      interfaceManipulator.clearProvisoryClassArray();
+      propsPanelUI.customPropertyAreaClear();
     }
 
     setNewMotherElement(){

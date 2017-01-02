@@ -4,8 +4,6 @@ class EditPanelUI{
         this.localEditsPanelOptions = null;
 
         //cross class instances
-        this.stateManager = stateManager;
-        this.dataTranslator = dataTranslator;
 
         //constructed areas
         this.editPanel = null;
@@ -40,15 +38,13 @@ class EditPanelUI{
 targetCoreItem(activatedBy){
   var t = this;
   var targetItem = null;
-  for(var i = 0; i < t.dataTranslator.coreStructureHolder.length; i++){
-      if (t.dataTranslator.coreStructureHolder[i].getVersionID() == $(activatedBy).attr('versionID')){
-        t.stateManager.setEditMode();
-        targetItem = t.dataTranslator.coreStructureHolder[i];
-        t.stateManager.setGlobalVersion(targetItem.getVersionID());
+  for(var i = 0; i < dataTranslator.coreStructureHolder.length; i++){
+      if (dataTranslator.coreStructureHolder[i].getVersionID() == $(activatedBy).attr('versionID')){
+        targetItem = dataTranslator.coreStructureHolder[i];
       }
     }
     if (targetItem != null){
-    return targetItem;
+      return targetItem;
     }
     else throw new Error('There is some inconsistency between core items and core items props.');
 }
@@ -58,8 +54,10 @@ targetCoreItem(activatedBy){
     var t = this;
     $(document).on('click', t.editActivator,function (){
         let targetCoreItem = t.targetCoreItem(this);
-        console.log('this' + this);
+        stateManager.setEditMode();
+        stateManager.setGlobalVersionRelease($(this).attr('versionID'));
         t.editPanelRerender(targetCoreItem);
+        controlPanelUI.switchToEditMode();
       });
   }
 
@@ -72,7 +70,7 @@ targetCoreItem(activatedBy){
             if(targetCoreItem.classArray[x] == $(this).children('span').text()){
                 targetCoreItem.classArray.splice(x,1);
                 t.editPanelRerender(targetCoreItem);
-                t.dataTranslator.rerenderPreview();
+                dataTranslator.rerenderPreview();
               }
             }
       });
