@@ -71,7 +71,7 @@
   background-color: coral;
   margin-bottom: 5px;
 }
-.standard-favourite-box, .standard-props-box {
+.standard-favourite-box, .standard-props-box, .custom-props-box {
   background-color: coral;
   margin-right: 10px;
   margin-bottom: 5px;
@@ -86,7 +86,7 @@
   float: left;
 }
 
-.standard-favourite-box:hover, .standard-props-box:hover {
+.standard-favourite-box:hover, .standard-props-box:hover, ..custom-props-box:hover {
   font-weight: bold;
 }
 .xs {

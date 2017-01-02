@@ -1,16 +1,18 @@
 class EventDirector {
     constructor() {
      this.activeVersionUserData = null;
+     this.dataTranslator = dataTranslator;
+     this.stateManager = stateManager;
     }
 
     userInteraction() {
       var t = this;
-      stateManager.nextVersion();
-      stateManager.uniqueIdentifierInc();
+      t.stateManager.nextVersion();
+      t.stateManager.uniqueIdentifierInc();
       t.getNewStructureEntity();
       t.saveNewStructureEntity();
       t.setNewMotherElement();
-      dataTranslator.rerenderPreview();
+      t.dataTranslator.rerenderPreview();
       t.clearProvisoryData();
     }
 
@@ -26,7 +28,7 @@ class EventDirector {
 
     clearProvisoryData(){
       var t = this;
-      interfaceManipulator.clearProvisoryClassArray();
+      t.dataTranslator.clearProvisoryClassArray();
     }
 
     setNewMotherElement(){

@@ -44,6 +44,7 @@ targetCoreItem(activatedBy){
       if (t.dataTranslator.coreStructureHolder[i].getVersionID() == $(activatedBy).attr('versionID')){
         t.stateManager.setEditMode();
         targetItem = t.dataTranslator.coreStructureHolder[i];
+        t.stateManager.setGlobalVersion(targetItem.getVersionID());
       }
     }
     if (targetItem != null){
@@ -71,6 +72,7 @@ targetCoreItem(activatedBy){
             if(targetCoreItem.classArray[x] == $(this).children('span').text()){
                 targetCoreItem.classArray.splice(x,1);
                 t.editPanelRerender(targetCoreItem);
+                t.dataTranslator.rerenderPreview();
               }
             }
       });

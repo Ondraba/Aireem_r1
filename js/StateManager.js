@@ -3,6 +3,17 @@ class StateManager {
         this.currentVersion = 0;
         this.uniqueIdentifier = 0;
         this.editMode = false;
+        this.globalVersionRelease = null;
+    }
+
+    getGlobalVersionRelease(){
+      var t = this;
+      return t.globalVersionRelease;
+    }
+
+    setGlobalVersionRelease(value){
+      var t = this;
+      t.globalVersionRelease = value;
     }
 
     getCurrentEditModeState(){
@@ -32,7 +43,7 @@ class StateManager {
     }
 
     resetVersion(){
-        var t = thisl
+        var t = this;
         t.currentVersion = 0;
     }
 

@@ -42,6 +42,14 @@ class DataTranslator {
           }
     }
 
+  clearProvisoryClassArray(){
+          var t = this;
+          var arrayToClear = t.provisoryClassHolder;
+          arrayToClear.splice(0);
+          }
+
+    //provisory class aray area
+
 
 
 
@@ -49,7 +57,6 @@ class DataTranslator {
       var t = this;
       interfaceManipulator.clearPreviewArea();
       for(let item of t.coreStructureHolder){
-        console.log('item', item);
         var newPreviewElement = $(document.createElement('div'));
         newPreviewElement.attr('coreid', item.getCoreID());
         newPreviewElement.attr('id',item.getUniqeName());
