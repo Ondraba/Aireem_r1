@@ -61,11 +61,9 @@ class InterfaceManipulator {
 
     userInputObtained() {
         var t = this;
-        var result = null;
         t.userInteractionTrigger.on('click', function () {
           eventDirector.userInteraction();
         });
-        return result;
       }
 
 //provisory class aray area
@@ -99,14 +97,22 @@ class InterfaceManipulator {
     }
 
     newVsEdit(){
-      if(stateManager.getCurrentEditModeState == true){
+      var t = this;
+      if(stateManager.getCurrentEditModeState() == false){
         t.getUserData();
       }
       else{
-        t.editUserData();
+        t.getEditUserData();
       }
     }
 
+    getEditUserData(){
+      var t = this;
+      var existingStructureEntity = editPanelUI.getCurrentActiveItem();
+      existingStructureEntity.setUniqueName(t.getStructureEntityName());
+      dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray);
+      existingStructureEntity.setMotherStructure(t.getMotherName());
+    }
 
     getUserData(){
       var t = this;
@@ -117,7 +123,7 @@ class InterfaceManipulator {
       dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray);
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
       newStructureEntity.setMotherStructure(t.getMotherName());
-      return newStructureEntity;
+      eventDirector.saveNewStructureEntity(newStructureEntity);
     }
 
 }

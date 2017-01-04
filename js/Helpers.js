@@ -1,19 +1,11 @@
 class Helpers {
     constructor() {
-      this.counter = null;
-
     }
 
   randomizeNumber(min, max){
     var randomResult = Math.floor((Math.random() * max) + min);
     return randomResult;
   }
-
-  counterInc(){
-    var t = this;
-    t.counter++;
-  }
-
 
   getRandomColor(){
     var randomInput = this.randomizeNumber(1,6);

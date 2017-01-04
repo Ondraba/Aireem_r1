@@ -3,6 +3,8 @@ class EditPanelUI{
         //options
         this.localEditsPanelOptions = null;
 
+        this.currentActiveItem = null;
+
         //cross class instances
 
         //constructed areas
@@ -35,12 +37,24 @@ class EditPanelUI{
   }
 //Edit init settings and controlls
 
+
+getCurrentActiveItem(){
+  var t = this;
+  return t.currentActiveItem;
+}
+
+setCurrentActiveItem(item){
+  var t = this;
+  t.currentActiveItem = item;
+}
+
 targetCoreItem(activatedBy){
   var t = this;
   var targetItem = null;
   for(var i = 0; i < dataTranslator.coreStructureHolder.length; i++){
       if (dataTranslator.coreStructureHolder[i].getVersionID() == $(activatedBy).attr('versionID')){
         targetItem = dataTranslator.coreStructureHolder[i];
+        t.setCurrentActiveItem(targetItem);
       }
     }
     if (targetItem != null){

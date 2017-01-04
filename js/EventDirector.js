@@ -1,15 +1,12 @@
 class EventDirector {
     constructor() {
-     this.activeVersionUserData = null;
     }
-
 
     userInteraction() {
       var t = this;
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
       interfaceManipulator.newVsEdit();
-      t.saveNewStructureEntity();
       t.setNewMotherElement();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
@@ -20,9 +17,9 @@ class EventDirector {
       t.activeVersionUserData = interfaceManipulator.getUserData();
     }
 
-    saveNewStructureEntity(){
+    saveNewStructureEntity(newStructureEntity){
       var t = this;
-      dataTranslator.setItemToCoreStructureHolder(t.activeVersionUserData);
+      dataTranslator.setItemToCoreStructureHolder(newStructureEntity);
     }
 
     clearProvisoryData(){
@@ -33,6 +30,6 @@ class EventDirector {
 
     setNewMotherElement(){
       var t = this;
-      interfaceManipulator.fillMothersList(t.activeVersionUserData.getUniqeName());
+      interfaceManipulator.fillMothersList('test');
     }
   }
