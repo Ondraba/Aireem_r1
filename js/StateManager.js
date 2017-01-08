@@ -29,6 +29,7 @@ class StateManager {
     disableEditMode(){
       var t = this;
       t.editMode = false;
+      controlPanelUI.switchToStandardMode();
     }
 
     getCurrentVersion(){

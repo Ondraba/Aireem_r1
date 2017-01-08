@@ -4,6 +4,19 @@ class EventDirector {
 
     userInteraction() {
       var t = this;
+      if (stateManager.getCurrentEditModeState() == false){
+        t.standardModeSequence();
+      }
+      else if (stateManager.getCurrentEditModeState() == true){
+        t.editModeSequence();
+      }
+      else{
+         throw new Error('No application mode state.');
+      }
+
+    }
+
+    standardModeSequence(){
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
       interfaceManipulator.newVsEdit();

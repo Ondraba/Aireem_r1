@@ -27,4 +27,9 @@ class ControlPanelUI {
       t.userInteractionTrigger.text('Editovat');
     }
 
+    switchToStandardMode(){
+      var t = this;
+      t.userInteractionTrigger.text('Pridej');
+    }
+
   }

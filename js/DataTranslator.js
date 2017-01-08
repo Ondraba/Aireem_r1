@@ -31,14 +31,27 @@ class DataTranslator {
 
     setItemToProvisoryClassHolder(item){
       var t = this;
-      t.provisoryClassHolder.push(item);
+      var arr = [];
+      arr.push(item);
+      var diffArray = helpers.arrayCompare(arr, t.provisoryClassHolder);
+        for (let filteredItem of diffArray){
+          t.provisoryClassHolder.push(filteredItem);
+        }
     }
 
 
-    provisoryToCoreSwap(coreStructureArray){
+    provisoryToCoreSwap(coreStructureArray, provisoryArray){
           var t = this;
-          for (let item of t.provisoryClassHolder){
-            coreStructureArray.push(item);
+          if(stateManager.getCurrentEditModeState() == true){
+          var diffArray = helpers.arrayCompare(provisoryArray, coreStructureArray);
+            for (let filteredItem of diffArray){
+              coreStructureArray.push(filteredItem);
+            }
+          }
+          else{
+            for (let item of provisoryArray){
+              coreStructureArray.push(item);
+            }
           }
       }
 

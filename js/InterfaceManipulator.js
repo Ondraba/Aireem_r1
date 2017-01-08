@@ -100,9 +100,11 @@ class InterfaceManipulator {
       var t = this;
       if(stateManager.getCurrentEditModeState() == false){
         t.getUserData();
+        stateManager.disableEditMode();
       }
       else{
         t.getEditUserData();
+        stateManager.setEditMode();
       }
     }
 
@@ -110,7 +112,7 @@ class InterfaceManipulator {
       var t = this;
       var existingStructureEntity = editPanelUI.getCurrentActiveItem();
       existingStructureEntity.setUniqueName(t.getStructureEntityName());
-      dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray);
+      dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
       existingStructureEntity.setMotherStructure(t.getMotherName());
     }
 
@@ -120,7 +122,7 @@ class InterfaceManipulator {
       newStructureEntity.setUniqueName(t.getStructureEntityName());
       newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
-      dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray);
+      dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray, dataTranslator.provisoryClassHolder);
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
       newStructureEntity.setMotherStructure(t.getMotherName());
       eventDirector.saveNewStructureEntity(newStructureEntity);

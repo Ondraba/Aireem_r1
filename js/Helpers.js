@@ -1,11 +1,18 @@
 class Helpers {
     constructor() {
+      console.log(this.getArrayDiff)
     }
 
   randomizeNumber(min, max){
     var randomResult = Math.floor((Math.random() * max) + min);
     return randomResult;
   }
+
+
+arrayCompare(arr1,arr2){
+ var diffArray = arr1.filter(x => arr2.indexOf(x) < 0 );
+ return diffArray;
+}
 
   getRandomColor(){
     var randomInput = this.randomizeNumber(1,6);
