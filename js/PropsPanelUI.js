@@ -2,28 +2,15 @@ class PropsPanelUI{
     constructor() {
         //options
         this.localOptions = propsPanelOptions;
-
         //cross class legacy
         this.favourites = this.localOptions.getPropsPanelOptions().creativeArea.favourites;
-
         //constructed areas
         this.propsPanelMain = null;
         this.customPropsPanel = null;
-
         //constructed controlls
         this.propsManipulator = null;
-
         //init methods and listeners
-        this.propsInit();
-    }
-
-   propsInit(){
-     var t = this;
-     t.propsPanelAreas();
-     t.fillPropsPanel();
-     t.propsPanelReaction();
-     t.customPropsPanelReaction();
-   }
+      }
 
   propsPanelAreas(){
     var t = this;

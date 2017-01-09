@@ -1,6 +1,66 @@
 class EventDirector {
     constructor() {
+      this.appInitSequence();
     }
+
+
+    appInitSequence(){
+      var t = this;
+      controlPanelUI.controlDefinition();
+      controlPanelUI.controlStartupInit();
+      propsPanelUI.fillPropsPanel();
+      propsPanelUI.propsPanelAreas();
+      editPanelUI.editPanelAreas();
+      t.initListeners();
+    }
+
+    initListeners(){
+        var t = this;
+        t.controlPanelUIListeners();
+        t.editPanelUIListeners();
+        t.propsPanelUIListeners();
+        t.eventDirectorListeners();
+    }
+
+    eventDirectorListeners(){
+      var t = this;
+    }
+
+    //cross class listeners
+    controlPanelUIListeners(){
+      controlPanelUI.userInputObtained();
+      controlPanelUI.fillProvisoryClassArray();
+    }
+
+    editPanelUIListeners(){
+      editPanelUI.editActivation();
+      editPanelUI.editRemoveConfirm();
+    }
+
+    propsPanelUIListeners(){
+      propsPanelUI.propsPanelReaction();
+      propsPanelUI.customPropsPanelReaction();
+    }
+    //cross class listeners
+
+    standardModeSequence(){
+      var t = this;
+      stateManager.nextVersion();
+      stateManager.uniqueIdentifierInc();
+      controlPanelUI.getUserData();
+      t.setNewMotherElement();
+      dataTranslator.rerenderPreview();
+      t.clearProvisoryData();
+    }
+
+    editModeSequence(){
+      var t = this;
+      stateManager.setEditMode();
+      controlPanelUI.getEditUserData();
+      dataTranslator.rerenderPreview();
+      t.clearProvisoryData();
+    }
+
 
     userInteraction() {
       var t = this;
@@ -16,20 +76,6 @@ class EventDirector {
 
     }
 
-    standardModeSequence(){
-      stateManager.nextVersion();
-      stateManager.uniqueIdentifierInc();
-      interfaceManipulator.newVsEdit();
-      t.setNewMotherElement();
-      dataTranslator.rerenderPreview();
-      t.clearProvisoryData();
-    }
-
-    getNewStructureEntity(){
-      var t = this;
-      t.activeVersionUserData = interfaceManipulator.getUserData();
-    }
-
     saveNewStructureEntity(newStructureEntity){
       var t = this;
       dataTranslator.setItemToCoreStructureHolder(newStructureEntity);
@@ -37,12 +83,12 @@ class EventDirector {
 
     clearProvisoryData(){
       var t = this;
-      interfaceManipulator.clearProvisoryClassArray();
+      controlPanelUI.clearProvisoryClassArray();
       propsPanelUI.customPropertyAreaClear();
     }
 
     setNewMotherElement(){
       var t = this;
-      interfaceManipulator.fillMothersList('test');
+      controlPanelUI.fillMothersList('test');
     }
   }
