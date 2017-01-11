@@ -68,7 +68,7 @@ class DataTranslator {
 
     rerenderPreview(){
       var t = this;
-      interfaceManipulator.clearPreviewArea();
+      controlPanelUI.clearPreviewArea();
       for(let item of t.coreStructureHolder){
         var newPreviewElement = $(document.createElement('div'));
         newPreviewElement.attr('coreid', item.getCoreID());

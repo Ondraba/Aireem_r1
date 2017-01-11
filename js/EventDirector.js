@@ -6,41 +6,8 @@ class EventDirector {
 
     appInitSequence(){
       var t = this;
-      controlPanelUI.controlDefinition();
-      controlPanelUI.controlStartupInit();
-      propsPanelUI.fillPropsPanel();
-      propsPanelUI.propsPanelAreas();
-      editPanelUI.editPanelAreas();
-      t.initListeners();
     }
 
-    initListeners(){
-        var t = this;
-        t.controlPanelUIListeners();
-        t.editPanelUIListeners();
-        t.propsPanelUIListeners();
-        t.eventDirectorListeners();
-    }
-
-    eventDirectorListeners(){
-      var t = this;
-    }
-
-    //cross class listeners
-    controlPanelUIListeners(){
-      controlPanelUI.userInputObtained();
-      controlPanelUI.fillProvisoryClassArray();
-    }
-
-    editPanelUIListeners(){
-      editPanelUI.editActivation();
-      editPanelUI.editRemoveConfirm();
-    }
-
-    propsPanelUIListeners(){
-      propsPanelUI.propsPanelReaction();
-      propsPanelUI.customPropsPanelReaction();
-    }
     //cross class listeners
 
     standardModeSequence(){

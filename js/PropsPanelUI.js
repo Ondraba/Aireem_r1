@@ -10,7 +10,20 @@ class PropsPanelUI{
         //constructed controlls
         this.propsManipulator = null;
         //init methods and listeners
+        this.initSequence();
       }
+
+  initSequence(){
+    var t = this;
+    //init methods
+    t.propsPanelAreas();
+    t.fillPropsPanel();
+
+
+    //listeners
+    t.propsPanelReaction();
+    t.customPropsPanelReaction();
+  }
 
   propsPanelAreas(){
     var t = this;
@@ -76,20 +89,23 @@ class PropsPanelUI{
 
   customPropsPanelReaction(){
     var t = this;
+    var propertyValue = null;
     $(document).on('click',t.customPropsManipulator,function (){
       var propertyValue = $(this).children('span').text();
-      var editModeState = stateManager.getCurrentEditModeState();
       for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
         if (dataTranslator.provisoryClassHolder[i] == propertyValue){
           dataTranslator.provisoryClassHolder.splice(i,1);
-          t.rerenderCustomProps();
         }
-        else{
-          throw new Error('There is something wrong between provisoryClassHolder and UI.');
-          }
+      }
+      if(propertyValue != null){
+        t.rerenderCustomProps();
+      }
+      else {
+        throw new Error('There is some error in CustomPropsPanel or ProvisoryClassHolder');
       }
     });
   }
+
 
 
   propertySelected(propertyValue, version){
@@ -113,12 +129,16 @@ class PropsPanelUI{
 
   rerenderCustomProps(){
     var t = this;
+    console.log('custom props nove'+ dataTranslator.provisoryClassHolder);
     t.customPropertyAreaClear();
-    var newCustomPropsPanel = $(document.createElement('div'));
-    var newCustomPropsPanelText = $(document.createElement('span'));
-      for(var i = 0; i < dataTranslator.provisoryClassHolder.lenght; i++){
-        newCustomPropsPanel.addClass(t.customPropsManipulator);
-        newCustomPropsPanelText.text(i);
+      for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
+        var newCustomPropsPanel = $(document.createElement('div'));
+        newCustomPropsPanel.attr('versionID', stateManager.getGlobalVersionRelease());
+        var newCustomPropsPanelText = $(document.createElement('span'));
+        let replacedClass = t.customPropsManipulator.replace('.','');
+        newCustomPropsPanel.addClass(replacedClass);
+        console.log('class' + t.customPropsManipulator);
+        newCustomPropsPanelText.text(dataTranslator.provisoryClassHolder[i]);
         newCustomPropsPanel.append(newCustomPropsPanelText);
         t.customPropsPanel.append(newCustomPropsPanel);
     }

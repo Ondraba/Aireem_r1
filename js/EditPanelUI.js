@@ -15,14 +15,17 @@ class EditPanelUI{
         this.editManipulator = null;
 
         //init methods and listerners
-        this.editInit();
+        this.initSequence();
     }
 
 
 //Edit init settings and areas/controlls
-  editInit(){
+  initSequence(){
     var t = this;
+    //init methods
     t.editPanelAreas();
+
+    //listeners
     t.editActivation();
     t.editRemoveConfirm();
   }
@@ -80,7 +83,7 @@ targetCoreItem(activatedBy){
     var t = this;
       $(document).on('click',t.editManipulator,function (){
           let targetCoreItem = t.targetCoreItem(this);
-          for(var x = 0; x < t.targetCoreItem(this).classArray.length; x++){
+          for(var x = 0; x < targetCoreItem.classArray.length; x++){
             if(targetCoreItem.classArray[x] == $(this).children('span').text()){
                 targetCoreItem.classArray.splice(x,1);
                 t.editPanelRerender(targetCoreItem);
@@ -92,7 +95,7 @@ targetCoreItem(activatedBy){
 
   editPanelRerender(coreElementToEdit){
     var t = this;
-    interfaceManipulator.clearEditArea();
+    controlPanelUI.clearEditArea();
     for(let item of coreElementToEdit.classArray){
       var newEditPropsPanel = $(document.createElement('div'));
       var newEditPropsPanelText = $(document.createElement('span'));
