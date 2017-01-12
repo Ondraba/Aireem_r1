@@ -15,7 +15,7 @@ class EventDirector {
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
       controlPanelUI.getUserData();
-      t.setNewMotherElement();
+      controlPanelUI.fillMothersList();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
     }
@@ -26,6 +26,7 @@ class EventDirector {
       controlPanelUI.getEditUserData();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
+      stateManager.disableEditMode();
     }
 
 
@@ -43,6 +44,12 @@ class EventDirector {
 
     }
 
+    removeInteraction(){
+      var t = this;
+      editPanelUI.removeCoreItem();
+      t.clearProvisoryData();
+    }
+
     saveNewStructureEntity(newStructureEntity){
       var t = this;
       dataTranslator.setItemToCoreStructureHolder(newStructureEntity);
@@ -52,10 +59,8 @@ class EventDirector {
       var t = this;
       controlPanelUI.clearProvisoryClassArray();
       propsPanelUI.customPropertyAreaClear();
+      editPanelUI.editPanelClear();
     }
 
-    setNewMotherElement(){
-      var t = this;
-      controlPanelUI.fillMothersList('test');
-    }
+
   }

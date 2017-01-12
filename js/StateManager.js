@@ -30,6 +30,7 @@ class StateManager {
       var t = this;
       t.editMode = false;
       controlPanelUI.switchToStandardMode();
+      editPanel.switchToStandardMode();
     }
 
     getCurrentVersion(){

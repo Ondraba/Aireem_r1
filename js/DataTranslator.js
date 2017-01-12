@@ -69,14 +69,19 @@ class DataTranslator {
     rerenderPreview(){
       var t = this;
       controlPanelUI.clearPreviewArea();
+      var colSizeCheck = 'col-sm-12';
       for(let item of t.coreStructureHolder){
         var newPreviewElement = $(document.createElement('div'));
         newPreviewElement.attr('coreid', item.getCoreID());
         newPreviewElement.attr('id',item.getUniqeName());
         newPreviewElement.attr('versionID',item.getVersionID());
+        newPreviewElement.addClass(colSizeCheck);
         for(let itemClass of item.classArray){
           if(item.classArray.length != 0){
           newPreviewElement.addClass(itemClass);
+            if(itemClass != colSizeCheck){
+            newPreviewElement.removeClass(colSizeCheck);
+            }
           }
           else{
             console.log('LOG: No class item in core structure element class array');

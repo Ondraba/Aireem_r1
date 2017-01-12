@@ -13,6 +13,7 @@ class EditPanelUI{
         ///constructed controlls
         this.editActivator = null;
         this.editManipulator = null;
+        this.editControl = null;
 
         //init methods and listerners
         this.initSequence();
@@ -26,7 +27,7 @@ class EditPanelUI{
     t.editPanelAreas();
 
     //listeners
-    t.editActivation();
+    t.editElementSelected();
     t.editRemoveConfirm();
   }
 
@@ -37,8 +38,19 @@ class EditPanelUI{
     //controlls
     t.editActivator = ".standardDiv";
     t.editManipulator = ".standard-favourite-box";
+    t.editControl = ".js_switch_to_edit";
   }
 //Edit init settings and controlls
+
+activateEditMode(){
+  t.editControl.on('click',function () {
+    stateManager.setEditMode();
+  }
+}
+
+switchToStandardMode(){
+ console.log('editace vypnuta');
+}
 
 
 getCurrentActiveItem(){
@@ -66,12 +78,19 @@ targetCoreItem(activatedBy){
     else throw new Error('There is some inconsistency between core items and core items props.');
 }
 
+removeCoreItem(){
+  var t = this;
+  var itemToRemove = t.getCurrentActiveItem();
+  var index = dataTranslator.coreStructureHolder.indexOf(itemToRemove);
+  dataTranslator.coreStructureHolder.splice(index,1);
+  dataTranslator.rerenderPreview();
+}
+
 //core edit methods
-  editActivation(){
+  editElementSelected(){
     var t = this;
     $(document).on('click', t.editActivator,function (){
         let targetCoreItem = t.targetCoreItem(this);
-        stateManager.setEditMode();
         stateManager.setGlobalVersionRelease($(this).attr('versionID'));
         t.editPanelRerender(targetCoreItem);
         controlPanelUI.switchToEditMode();
@@ -105,6 +124,11 @@ targetCoreItem(activatedBy){
       newEditPropsPanel.append(newEditPropsPanelText);
       t.editPanel.append(newEditPropsPanel);
     }
+  }
+
+  editPanelClear(){
+    var t = this;
+    t.editPanel.empty();
   }
 //core edit methods
 

@@ -65,7 +65,14 @@
   min-height: 80px;
   background-color: #ffffff;
   margin-bottom: 10px;
+  margin-right: 5px;
+  margin-top: 5px;
 }
+
+.standardDiv:hover{
+  background-color: coral;
+}
+
 .innerDiv {
   min-height: 30px;
   background-color: coral;
