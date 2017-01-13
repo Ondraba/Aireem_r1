@@ -45,7 +45,7 @@ class EditPanelUI{
 activateEditMode(){
   t.editControl.on('click',function () {
     stateManager.setEditMode();
-  }
+  });
 }
 
 switchToStandardMode(){
@@ -90,10 +90,13 @@ removeCoreItem(){
   editElementSelected(){
     var t = this;
     $(document).on('click', t.editActivator,function (){
+
         let targetCoreItem = t.targetCoreItem(this);
         stateManager.setGlobalVersionRelease($(this).attr('versionID'));
         t.editPanelRerender(targetCoreItem);
         controlPanelUI.switchToEditMode();
+        stateManager.setEditMode();
+      
       });
   }
 
