@@ -10,7 +10,7 @@ class EventDirector {
 
     //cross class listeners
 
-    standardModeSequence(){
+    standardModeSubmitSequence(){
       var t = this;
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
@@ -18,25 +18,37 @@ class EventDirector {
       controlPanelUI.fillMothersList();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
+      controlPanelUI.clearMotherElement();
     }
 
-    editModeSequence(){
+    editModeSubmitSequence(){
       var t = this;
       stateManager.setEditMode();
       controlPanelUI.getEditUserData();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
       stateManager.disableEditMode();
+      controlPanelUI.clearMotherElement();
     }
+
+    standardModeTargetSequence(){
+
+    }
+
+    editModeTargetSequence(){
+
+    }
+
+
 
 
     userInteraction() {
       var t = this;
       if (stateManager.getCurrentEditModeState() == false){
-        t.standardModeSequence();
+        t.standardModeSubmitSequence();
       }
       else if (stateManager.getCurrentEditModeState() == true){
-        t.editModeSequence();
+        t.editModeSubmitSequence();
       }
       else{
          throw new Error('No application mode state.');

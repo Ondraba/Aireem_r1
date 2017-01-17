@@ -8,6 +8,9 @@ class ControlPanelUI {
         this.removeControl = null;
         this.userInteractionTrigger = null;
 
+        this.defaultMotherElement = layoutBuilderOptions.options.coreStructureElements.defaultMotherElement;layoutBuilderOptions.options.coreStructureElements.defaultMotherElement;
+        this.motherElement = this.defaultMotherElement;
+
         this.provisoryClassArray = [];
 
         this.initSequence();
@@ -17,7 +20,6 @@ class ControlPanelUI {
         var t = this;
         //init methods
         t.controlDefinition();
-        t.controlStartupInit();
 
         //listeners
         t.userInputListener();
@@ -29,6 +31,21 @@ class ControlPanelUI {
         var t = this;
         var currentVersion = stateManager.getCurrentVersion();
         return currentVersion;
+    }
+
+    getMotherElement(){
+      var t = this;
+      return t.motherElement;
+    }
+
+    setNewMotherElement(newMotherElement){
+      var t = this;
+      t.motherElement = newMotherElement;
+    }
+
+    clearMotherElement(){
+      var t = this;
+      t.motherElement = t.defaultMotherElement;
     }
 
     controlDefinition() {
@@ -141,8 +158,8 @@ class ControlPanelUI {
       var t = this;
       var existingStructureEntity = editPanelUI.getCurrentActiveItem();
       existingStructureEntity.setUniqueName(t.getStructureEntityName());
+      existingStructureEntity.setMotherStructure(t.getMotherElement());
       dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
-      existingStructureEntity.setMotherStructure(t.getMotherName());
     }
 
     getUserData(){
@@ -153,7 +170,7 @@ class ControlPanelUI {
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
       dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray, dataTranslator.provisoryClassHolder);
       newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(),'aireemDA');
-      newStructureEntity.setMotherStructure(t.getMotherName());
+      newStructureEntity.setMotherStructure(t.getMotherElement());
       eventDirector.saveNewStructureEntity(newStructureEntity);
     }
 

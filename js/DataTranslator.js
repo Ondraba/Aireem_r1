@@ -88,14 +88,15 @@ class DataTranslator {
           }
         }
         if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
-        newPreviewElement.addClass('standardDiv');
+          newPreviewElement.addClass('standardDiv');
+          $(item.getMotherSelector()).append(newPreviewElement);
         }
         else{
-        newPreviewElement.addClass('innerDiv');
+          newPreviewElement.addClass('innerDiv');
+          $(item.getMotherStructure()).append(newPreviewElement);
+          console.log('item je'+ $(item.getMotherStructure()).attr('versionID'));
+                console.log('new preview iten je' +   newPreviewElement.attr('versionID'));
         }
-
-        $(item.getMotherSelector()).append(newPreviewElement);
-        console.log(item.getMotherSelector());
       }
     }
 }

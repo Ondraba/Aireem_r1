@@ -90,16 +90,25 @@ removeCoreItem(){
   editElementSelected(){
     var t = this;
     $(document).on('click', t.editActivator,function (){
-
         let targetCoreItem = t.targetCoreItem(this);
-        stateManager.setGlobalVersionRelease($(this).attr('versionID'));
-        t.editPanelRerender(targetCoreItem);
-        controlPanelUI.switchToEditMode();
-        stateManager.setEditMode();
-      
+          if(stateManager.getCurrentEditModeState() == true){
+            stateManager.setGlobalVersionRelease($(this).attr('versionID'));
+            t.editPanelRerender(targetCoreItem);
+            controlPanelUI.switchToEditMode();
+          }
+          else{
+            t.motherElementSelected(this);
+            console.log('ma byt' + this);
+          }
+
       });
   }
 
+  motherElementSelected(newMotherElement){
+    $(newMotherElement).addClass('selectedMotherElement');
+    controlPanelUI.setNewMotherElement(newMotherElement);
+    console.log('matka je ' + newMotherElement);
+  }
 
   editRemoveConfirm(){
     var t = this;

@@ -69,6 +69,10 @@
   margin-top: 5px;
 }
 
+.selectedMotherElement{
+background-color: grey;
+}
+
 .standardDiv:hover{
   background-color: coral;
 }
