@@ -73,7 +73,6 @@ class DataTranslator {
       for(let item of t.coreStructureHolder){
         var newPreviewElement = $(document.createElement('div'));
         newPreviewElement.attr('coreid', item.getCoreID());
-        newPreviewElement.attr('id',item.getUniqeName());
         newPreviewElement.attr('versionID',item.getVersionID());
         newPreviewElement.addClass(colSizeCheck);
         for(let itemClass of item.classArray){

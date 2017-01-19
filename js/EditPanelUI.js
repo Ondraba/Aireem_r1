@@ -29,6 +29,7 @@ class EditPanelUI{
     //listeners
     t.editElementSelected();
     t.editRemoveConfirm();
+    t.activateEditMode();
   }
 
   editPanelAreas(){
@@ -43,7 +44,8 @@ class EditPanelUI{
 //Edit init settings and controlls
 
 activateEditMode(){
-  t.editControl.on('click',function () {
+  var t = this;
+$(document).on('click', t.editControl,function () {
     stateManager.setEditMode();
   });
 }

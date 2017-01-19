@@ -157,7 +157,6 @@ class ControlPanelUI {
     getEditUserData(){
       var t = this;
       var existingStructureEntity = editPanelUI.getCurrentActiveItem();
-      existingStructureEntity.setUniqueName(t.getStructureEntityName());
       existingStructureEntity.setMotherStructure(t.getMotherElement());
       dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
     }
@@ -165,7 +164,6 @@ class ControlPanelUI {
     getUserData(){
       var t = this;
       var newStructureEntity = new StructureEntity();
-      newStructureEntity.setUniqueName(t.getStructureEntityName());
       newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
       newStructureEntity.setVersionID(stateManager.getCurrentVersion());
       dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray, dataTranslator.provisoryClassHolder);
