@@ -97,17 +97,21 @@ removeCoreItem(){
             controlPanelUI.switchToEditMode();
           }
           else{
-            t.motherElementSelected(this);
-            console.log('ma byt' + this);
+            t.motherElementSelected($(this).attr('coreid'));
           }
 
       });
   }
 
   motherElementSelected(newMotherElement){
-    $(newMotherElement).addClass('selectedMotherElement');
-    controlPanelUI.setNewMotherElement(newMotherElement);
-    console.log('matka je ' + newMotherElement);
+    var newMotherElementCheck = parseInt(newMotherElement);
+    if(typeof newMotherElementCheck === "number" && newMotherElement > 0){
+      $("div[coreid='" + newMotherElementCheck + "']").addClass('selectedMotherElement');
+      controlPanelUI.setNewMotherElement(newMotherElementCheck);
+    }
+    else{
+       throw new Error('There is some error in coreid system');
+    }
   }
 
   editRemoveConfirm(){

@@ -93,9 +93,7 @@ class DataTranslator {
         }
         else{
           newPreviewElement.addClass('innerDiv');
-          $(item.getMotherStructure()).append(newPreviewElement);
-          console.log('item je'+ $(item.getMotherStructure()).attr('versionID'));
-                console.log('new preview iten je' +   newPreviewElement.attr('versionID'));
+          $("div[coreid='" + item.getMotherStructure() + "']").append(newPreviewElement);
         }
       }
     }
