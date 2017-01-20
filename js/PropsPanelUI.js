@@ -83,6 +83,7 @@ class PropsPanelUI{
             }
             else{
               t.propertySelected(propertyValue, stateManager.getGlobalVersionRelease());
+              eventDirector.editModeSubmitSequence();
             }
         });
   }
@@ -98,7 +99,13 @@ class PropsPanelUI{
         }
       }
       if(propertyValue != null){
-        t.rerenderCustomProps();
+        if(stateManager.getCurrentEditModeState() == true){
+          eventDirector.editModeSubmitSequence();
+          t.rerenderCustomProps();
+        }
+        else{
+          t.rerenderCustomProps();
+        }
       }
       else {
         throw new Error('There is some error in CustomPropsPanel or ProvisoryClassHolder');
@@ -140,7 +147,7 @@ class PropsPanelUI{
         console.log('class' + t.customPropsManipulator);
         newCustomPropsPanelText.text(dataTranslator.provisoryClassHolder[i]);
         newCustomPropsPanel.append(newCustomPropsPanelText);
-        t.customPropsPanel.append(newCustomPropsPanel);
+        editPanelUI.editPanel.append(newCustomPropsPanel);
     }
   }
 

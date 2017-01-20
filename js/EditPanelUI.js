@@ -37,8 +37,8 @@ class EditPanelUI{
     //areas
     t.editPanel = $('.edit-panel-main');
     //controlls
-    t.editActivator = ".standardDiv";
-    t.editManipulator = ".standard-favourite-box";
+    t.editActivator = ".js_selectableDiv";
+    t.editManipulator = ".js_edit_prop_box";
     t.editControl = ".js_switch_to_edit";
   }
 //Edit init settings and controlls
@@ -91,8 +91,17 @@ removeCoreItem(){
 //core edit methods
   editElementSelected(){
     var t = this;
-    $(document).on('click', t.editActivator,function (){
-        let targetCoreItem = t.targetCoreItem(this);
+    $(document).on('click', t.editActivator,function (e){
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
+
+      controlPanelUI.clearProvisoryClassArray();
+      t.editPanelClear();
+      propsPanelUI.customPropertyAreaClear();
+
+       //event propagation settings - document.captureEvents(Event.CLICK); vs on('click') bubbling
+          let targetCoreItem = t.targetCoreItem(this);
           if(stateManager.getCurrentEditModeState() == true){
             stateManager.setGlobalVersionRelease($(this).attr('versionID'));
             t.editPanelRerender(targetCoreItem);
@@ -101,7 +110,6 @@ removeCoreItem(){
           else{
             t.motherElementSelected($(this).attr('coreid'));
           }
-
       });
   }
 
@@ -137,7 +145,7 @@ removeCoreItem(){
       var newEditPropsPanel = $(document.createElement('div'));
       var newEditPropsPanelText = $(document.createElement('span'));
       newEditPropsPanel.attr('versionID',coreElementToEdit.getVersionID());
-      newEditPropsPanel.addClass('standard-favourite-box');
+      newEditPropsPanel.addClass('js_edit_prop_box');
       newEditPropsPanelText.text(item);
       newEditPropsPanel.append(newEditPropsPanelText);
       t.editPanel.append(newEditPropsPanel);

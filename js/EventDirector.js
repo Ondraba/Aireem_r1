@@ -26,16 +26,16 @@ class EventDirector {
       stateManager.setEditMode();
       controlPanelUI.getEditUserData();
       dataTranslator.rerenderPreview();
-      t.clearProvisoryData();
-      stateManager.disableEditMode();
+      // t.clearProvisoryEditData();
+      // // stateManager.disableEditMode();
       controlPanelUI.clearMotherElement();
     }
 
-    standardModeTargetSequence(){
-
+    standardModeTargetSequence(activatedBy){
+    
     }
 
-    editModeTargetSequence(){
+    editModeTargetSequence(activatedBy){
 
     }
 
@@ -68,6 +68,13 @@ class EventDirector {
     }
 
     clearProvisoryData(){
+      var t = this;
+      controlPanelUI.clearProvisoryClassArray();
+      propsPanelUI.customPropertyAreaClear();
+      editPanelUI.editPanelClear();
+    }
+
+    clearProvisoryEditData(){
       var t = this;
       controlPanelUI.clearProvisoryClassArray();
       propsPanelUI.customPropertyAreaClear();

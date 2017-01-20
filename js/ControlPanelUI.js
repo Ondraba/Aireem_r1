@@ -157,7 +157,7 @@ class ControlPanelUI {
     getEditUserData(){
       var t = this;
       var existingStructureEntity = editPanelUI.getCurrentActiveItem();
-      existingStructureEntity.setMotherStructure(t.getMotherElement());
+      // existingStructureEntity.setMotherStructure(t.getMotherElement());
       dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
     }
 
