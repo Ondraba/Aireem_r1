@@ -64,7 +64,32 @@ class DataTranslator {
     //provisory class aray area
 
 
+    presetCoreIds(){
+      for(let item of t.coreStructureHolder){
+        var newPreviewElement = $(document.createElement('div'));
+        newPreviewElement.attr('coreid', item.getCoreID());
+      }
+    }
 
+
+    rerenderMothersAndChilds(){
+      var t = this;
+        for(let item of t.coreStructureHolder){
+          var coreIdVal = item.getCoreID();
+          var motherIdVal = item.getMotherStructure();
+          var coreItem = $("div[coreid='" + coreIdVal + "']");
+          console.log('core' + coreItem);
+          var motherItem = $("div[coreid='" + motherIdVal + "']");
+          if (motherIdVal == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
+            coreItem.addClass('standardDiv');
+            $(item.getMotherSelector()).append(coreItem);
+          }
+          else{
+              coreItem.addClass('innerDiv');
+              motherItem.append(coreItem);
+          }
+        }
+    }
 
     rerenderPreview(){
       var t = this;
@@ -87,14 +112,17 @@ class DataTranslator {
             console.log('LOG: No class item in core structure element class array');
           }
         }
-        if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
-          newPreviewElement.addClass('standardDiv');
-          $(item.getMotherSelector()).append(newPreviewElement);
-        }
-        else{
-          newPreviewElement.addClass('innerDiv');
-          $("div[coreid='" + item.getMotherStructure() + "']").append(newPreviewElement);
-        }
+        newPreviewElement.addClass('preexist');
+        $('#' + layoutBuilderOptions.options.coreStructureElements.defaultMotherElement).append(newPreviewElement);
+        // if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
+        //   newPreviewElement.addClass('standardDiv');
+        //   $(item.getMotherSelector()).append(newPreviewElement);
+        // }
+        // else{
+        //   newPreviewElement.addClass('innerDiv');
+        //   $("div[coreid='" + item.getMotherStructure() + "']").append(newPreviewElement);
+        // }
       }
+      t.rerenderMothersAndChilds();
     }
 }

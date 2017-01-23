@@ -68,22 +68,6 @@ class ControlPanelUI {
       $('#structure-content').empty();
     }
 
-
-    clearEditArea(){
-      $('.edit-panel-main').empty();
-    }
-
-    fillTheLists(selectList, newOption){
-       var t = this;
-       selectList.append(("<option value='" + newOption + "'>" + newOption + "</option>"));
-    }
-
-    fillMothersList(newOption){
-      var t = this;
-      t.fillTheLists(t.motherControl, newOption);
-    }
-
-
     userInputListener() {
         var t = this;
         t.userInteractionTrigger.on('click', function () {
@@ -130,23 +114,6 @@ class ControlPanelUI {
       var t = this;
       var mothersName = t.motherControl.val();
       return mothersName;
-    }
-
-    newVsEdit(){
-      var t = this;
-      if(stateManager.getCurrentEditModeState() == false){
-        t.getUserData();
-        stateManager.disableEditMode();
-      }
-      else{
-        t.getEditUserData();
-        stateManager.setEditMode();
-      }
-    }
-
-    switchToEditMode(){
-      var t = this;
-      t.userInteractionTrigger.text('Editovat');
     }
 
     switchToStandardMode(){

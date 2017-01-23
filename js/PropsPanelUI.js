@@ -52,6 +52,29 @@ class PropsPanelUI{
       appendArea.append(newProp);
   }
 
+  customPropertyAreaClear(){
+    var t = this;
+    t.customPropsPanel.empty();
+  }
+
+
+  rerenderCustomProps(){
+    var t = this;
+    console.log('custom props nove'+ dataTranslator.provisoryClassHolder);
+    editPanelUI.editPanelClear();
+      for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
+        var newCustomPropsPanel = $(document.createElement('div'));
+        newCustomPropsPanel.attr('versionID', stateManager.getGlobalVersionRelease());
+        var newCustomPropsPanelText = $(document.createElement('span'));
+        let replacedClass = t.customPropsManipulator.replace('.','');
+        newCustomPropsPanel.addClass(replacedClass);
+        console.log('class' + t.customPropsManipulator);
+        newCustomPropsPanelText.text(dataTranslator.provisoryClassHolder[i]);
+        newCustomPropsPanel.append(newCustomPropsPanelText);
+        editPanelUI.editPanel.append(newCustomPropsPanel);
+    }
+  }
+
   fillPropsPanel(){
       var t = this;
       var activeProps = t.localOptions.getActiveProps();
@@ -78,35 +101,62 @@ class PropsPanelUI{
             if(editModeState == null){
               throw new Error('There is some error in State Manager processing.');
             }
-            else if (editModeState == false) {
-              t.propertySelected(propertyValue, 'Before confirm version release.');
-            }
-            else{
-              t.propertySelected(propertyValue, stateManager.getGlobalVersionRelease());
-              eventDirector.editModeSubmitSequence();
-            }
+          else{
+              t.propertySelected(propertyValue);
+          }
         });
   }
+
+
+    propertySelected(propertyValue){
+      var t = this;
+      dataTranslator.setItemToProvisoryClassHolder(propertyValue);
+          if(stateManager.getCurrentEditModeState() == true){
+            var existingStructureEntity = editPanelUI.getCurrentActiveItem();
+            // existingStructureEntity.setMotherStructure(t.getMotherElement());
+            if(existingStructureEntity != null){
+            dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
+            editPanelUI.editPanelRerender(editPanelUI.getCurrentActiveItem());
+            dataTranslator.rerenderPreview();
+            dataTranslator.clearProvisoryClassArray();
+            }
+            else{
+               throw new Error('App state must be set to boolean value.');
+            }
+          }
+          else{
+            t.rerenderByNewProperty('Before confirm version release.');
+          }
+    }
+
+
+      rerenderByNewProperty(version){
+        var t = this;
+        editPanelUI.editPanelClear();
+        for(let item of dataTranslator.provisoryClassHolder){
+          t.newPropertyHTML(editPanelUI.editPanel, 'none', item, dataTranslator.provisoryClassHolder, t.customPropsManipulator, version);
+        }
+      }
+
 
   customPropsPanelReaction(){
     var t = this;
     var propertyValue = null;
     $(document).on('click',t.customPropsManipulator,function (){
-      var propertyValue = $(this).children('span').text();
-      for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
-        if (dataTranslator.provisoryClassHolder[i] == propertyValue){
-          dataTranslator.provisoryClassHolder.splice(i,1);
+      if(stateManager.getCurrentEditModeState() == false){
+        var propertyValue = $(this).children('span').text();
+        for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
+          if (dataTranslator.provisoryClassHolder[i] == propertyValue){
+            dataTranslator.provisoryClassHolder.splice(i,1);
+          }
         }
-      }
-      if(propertyValue != null){
-        if(stateManager.getCurrentEditModeState() == true){
-          eventDirector.editModeSubmitSequence();
-          t.rerenderCustomProps();
-        }
-        else{
-          t.rerenderCustomProps();
-        }
-      }
+        if(propertyValue != null){
+            t.rerenderCustomProps();
+          }
+          else{
+           throw new Error('Custom props are not available in standard mode.');
+          }
+    }
       else {
         throw new Error('There is some error in CustomPropsPanel or ProvisoryClassHolder');
       }
@@ -115,40 +165,5 @@ class PropsPanelUI{
 
 
 
-  propertySelected(propertyValue, version){
-    var t = this;
-    dataTranslator.setItemToProvisoryClassHolder(propertyValue);
-    t.rerenderByNewProperty(version);
-  }
-
-  customPropertyAreaClear(){
-    var t = this;
-    t.customPropsPanel.empty();
-  }
-
-  rerenderByNewProperty(version){
-    var t = this;
-    t.customPropertyAreaClear();
-    for(let item of dataTranslator.provisoryClassHolder){
-      t.newPropertyHTML(t.customPropsPanel, 'none', item, dataTranslator.provisoryClassHolder, t.customPropsManipulator, version);
-    }
-  }
-
-  rerenderCustomProps(){
-    var t = this;
-    console.log('custom props nove'+ dataTranslator.provisoryClassHolder);
-    t.customPropertyAreaClear();
-      for(var i = 0; i < dataTranslator.provisoryClassHolder.length; i++){
-        var newCustomPropsPanel = $(document.createElement('div'));
-        newCustomPropsPanel.attr('versionID', stateManager.getGlobalVersionRelease());
-        var newCustomPropsPanelText = $(document.createElement('span'));
-        let replacedClass = t.customPropsManipulator.replace('.','');
-        newCustomPropsPanel.addClass(replacedClass);
-        console.log('class' + t.customPropsManipulator);
-        newCustomPropsPanelText.text(dataTranslator.provisoryClassHolder[i]);
-        newCustomPropsPanel.append(newCustomPropsPanelText);
-        editPanelUI.editPanel.append(newCustomPropsPanel);
-    }
-  }
 
 }

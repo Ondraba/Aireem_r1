@@ -4,6 +4,7 @@ class EditPanelUI{
         this.localEditsPanelOptions = null;
 
         this.currentActiveItem = null;
+        this.stayOnItem = null;
 
         //cross class instances
 
@@ -30,6 +31,7 @@ class EditPanelUI{
     t.editElementSelected();
     t.editRemoveConfirm();
     t.activateEditMode();
+    t.setInitState();
   }
 
   editPanelAreas(){
@@ -43,11 +45,40 @@ class EditPanelUI{
   }
 //Edit init settings and controlls
 
+setInitState(){
+  var t = this;
+  $(t.editControl).text('Zapnout editaci');
+}
+
 activateEditMode(){
   var t = this;
-$(document).on('click', t.editControl,function () {
+  $(t.editControl).on('click',function () {
+    if(stateManager.getCurrentEditModeState() == false){
     stateManager.setEditMode();
+    $(this).text('Vypnout editaci');
+    }
+    else{
+      stateManager.disableEditMode();
+      t.unsetStayOnItem();
+      t.setInitState();
+      controlPanelUI.clearMotherElement();
+    }
   });
+}
+
+setStayOnItem(item){
+  var t = this;
+  t.stayOnItem = item;
+}
+
+unsetStayOnItem(){
+  var t = this;
+  t.stayOnItem = null;
+}
+
+getStayOnItem(){
+  var t = this;
+  return t.stayOnItem;
 }
 
 switchToStandardMode(){
@@ -71,7 +102,9 @@ targetCoreItem(activatedBy){
   for(var i = 0; i < dataTranslator.coreStructureHolder.length; i++){
       if (dataTranslator.coreStructureHolder[i].getVersionID() == $(activatedBy).attr('versionID')){
         targetItem = dataTranslator.coreStructureHolder[i];
+        if(t.getStayOnItem() == null){
         t.setCurrentActiveItem(targetItem);
+        }
       }
     }
     if (targetItem != null){
@@ -79,6 +112,8 @@ targetCoreItem(activatedBy){
     }
     else throw new Error('There is some inconsistency between core items and core items props.');
 }
+
+
 
 removeCoreItem(){
   var t = this;
@@ -98,14 +133,24 @@ removeCoreItem(){
 
       controlPanelUI.clearProvisoryClassArray();
       t.editPanelClear();
-      propsPanelUI.customPropertyAreaClear();
 
+      propsPanelUI.customPropertyAreaClear();
+      let targetCoreItem = t.targetCoreItem(this);
+      controlPanelUI.setNewMotherElement(targetCoreItem.getMotherStructure());
        //event propagation settings - document.captureEvents(Event.CLICK); vs on('click') bubbling
-          let targetCoreItem = t.targetCoreItem(this);
           if(stateManager.getCurrentEditModeState() == true){
-            stateManager.setGlobalVersionRelease($(this).attr('versionID'));
-            t.editPanelRerender(targetCoreItem);
-            controlPanelUI.switchToEditMode();
+            if(t.getStayOnItem() == null){
+              stateManager.setGlobalVersionRelease($(this).attr('versionID'));
+              t.editPanelRerender(targetCoreItem);
+              t.setStayOnItem($(this).attr('coreid'));
+              }
+            else{
+              t.motherElementSelected($(this).attr('coreid'));
+              var existingStructureEntity = editPanelUI.getCurrentActiveItem();
+              existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
+              console.log('structure is here' + dataTranslator.coreStructureHolder);
+              dataTranslator.rerenderPreview();
+              }
           }
           else{
             t.motherElementSelected($(this).attr('coreid'));
@@ -140,7 +185,7 @@ removeCoreItem(){
 
   editPanelRerender(coreElementToEdit){
     var t = this;
-    controlPanelUI.clearEditArea();
+      t.editPanelClear();
     for(let item of coreElementToEdit.classArray){
       var newEditPropsPanel = $(document.createElement('div'));
       var newEditPropsPanelText = $(document.createElement('span'));

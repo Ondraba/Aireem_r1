@@ -15,7 +15,6 @@ class EventDirector {
       stateManager.nextVersion();
       stateManager.uniqueIdentifierInc();
       controlPanelUI.getUserData();
-      controlPanelUI.fillMothersList();
       dataTranslator.rerenderPreview();
       t.clearProvisoryData();
       controlPanelUI.clearMotherElement();
@@ -28,11 +27,18 @@ class EventDirector {
       dataTranslator.rerenderPreview();
       // t.clearProvisoryEditData();
       // // stateManager.disableEditMode();
+      // controlPanelUI.clearMotherElement();
+    }
+
+    fullReset(){
+      editPanelUI.editPanelClear();
+      propsPanelUI.customPropertyAreaClear();
+      dataTranslator.clearProvisoryClassArray();
       controlPanelUI.clearMotherElement();
     }
 
     standardModeTargetSequence(activatedBy){
-    
+
     }
 
     editModeTargetSequence(activatedBy){
