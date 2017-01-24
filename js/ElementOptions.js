@@ -1,32 +1,29 @@
-class ElementOptions{
-    constructor() {
+class ElementOptions {
+  constructor() {
 
     this.options = this.getElementOptions();
 
-    }
+  }
 
-getElementOptions(){
+  getElementOptions() {
     var elementOptions = {
-      basics :
-        {
-          height: 40,
-        },
+      basics: {
+        height: 40,
+      },
 
-      structureMapOptions :
-        {
-          height: 30
-        },
+      structureMapOptions: {
+        height: 30
+      },
 
-      elementInheritence :
-        {
-         defaultMaskRoot : $('.element-review'),
-         defaultStructureRoot : 'structure-content'
-        }
+      elementInheritence: {
+        defaultMaskRoot: $('.element-review'),
+        defaultStructureRoot: 'structure-content'
+      }
 
     }
 
     return elementOptions;
-}
+  }
 
 
 }

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Chrome against localhost",
+            "type": "chrome",
+            "request": "launch",
+            "url": "file:///C:/Users/datart/Desktop/Aireem_r1/Aireem_r1/index.html",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": "Attach to Chrome",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "webRoot": "${workspaceRoot}"
+        }
+    ]
+}

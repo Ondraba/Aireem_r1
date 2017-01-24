@@ -1,16 +1,15 @@
-class LayoutBuilderOptions{
-    constructor() {
+class LayoutBuilderOptions {
+  constructor() {
     this.options = this.getOptions();
-    }
+  }
 
-getOptions(){
+  getOptions() {
     var options = {
-      coreStructureElements :
-        {
-          defaultMotherElement: 'structure-content'
-        }
+      coreStructureElements: {
+        defaultMotherElement: 'structure-content'
       }
-  return options;
-}
+    }
+    return options;
+  }
 
 }

@@ -20,10 +20,10 @@ class StructureEntity {
         return this.coreID;
     }
 
-    getCoreIDSelector(){
-      var t = this;
-      var coreIDSelector = ('#' + t.getCoreID());
-      return coreIDSelector;
+    getCoreIDSelector() {
+        var t = this;
+        var coreIDSelector = ('#' + t.getCoreID());
+        return coreIDSelector;
     }
 
     getVersionID() {
@@ -34,15 +34,15 @@ class StructureEntity {
         return this.classArray[index];
     }
 
-    getWholeClassArray(){
+    getWholeClassArray() {
         return this.classArray;
     }
 
-    getSingleMapAttr(key){
+    getSingleMapAttr(key) {
         return this.attrMap.get(key);
     }
 
-    getAllSingleMapAttrPairs(){
+    getAllSingleMapAttrPairs() {
         var t = this;
         for (var [key, value] of t.attrMap.entries()) {
             console.log(key + " = " + value);
@@ -50,7 +50,7 @@ class StructureEntity {
     }
 
 
-    getWholeAttrMap(){
+    getWholeAttrMap() {
         return this.attrMap;
     }
 
@@ -58,17 +58,17 @@ class StructureEntity {
         return this.motherStructure;
     }
 
-    getMotherSelector(){
-      var t = this;
-      var motherSelector = ('#' + t.getMotherStructure());
-      return motherSelector;
+    getMotherSelector() {
+        var t = this;
+        var motherSelector = ('#' + t.getMotherStructure());
+        return motherSelector;
     }
     //getters
 
 
     //setters
     setUniqueName(uniqueName) {
-       this.uniqueName = uniqueName;
+        this.uniqueName = uniqueName;
     }
 
     setcoreID(coreID) {
@@ -80,7 +80,7 @@ class StructureEntity {
     }
 
     pushToClassArray(item) {
-       this.classArray.push(item);
+        this.classArray.push(item);
     }
 
     pushToAttrMap(key, value) {
