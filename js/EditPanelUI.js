@@ -61,7 +61,7 @@ activateEditMode(){
       stateManager.disableEditMode();
       t.unsetStayOnItem();
       t.setInitState();
-      controlPanelUI.clearMotherElement();
+      eventDirector.fullReset();
     }
   });
 }

@@ -112,17 +112,12 @@ class DataTranslator {
             console.log('LOG: No class item in core structure element class array');
           }
         }
-        newPreviewElement.addClass('preexist');
+        // newPreviewElement.addClass('preexist');
         $('#' + layoutBuilderOptions.options.coreStructureElements.defaultMotherElement).append(newPreviewElement);
-        // if (item.getMotherStructure() == layoutBuilderOptions.options.coreStructureElements.defaultMotherElement){
-        //   newPreviewElement.addClass('standardDiv');
-        //   $(item.getMotherSelector()).append(newPreviewElement);
-        // }
-        // else{
-        //   newPreviewElement.addClass('innerDiv');
-        //   $("div[coreid='" + item.getMotherStructure() + "']").append(newPreviewElement);
-        // }
-      }
+
       t.rerenderMothersAndChilds();
     }
 }
+
+}
+

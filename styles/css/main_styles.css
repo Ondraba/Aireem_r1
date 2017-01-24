@@ -92,6 +92,7 @@ border: 2px solid white;
   margin-right: 5px;
   border: 2px solid white;
   margin-top: 5px;
+  float:left;
 }
 .standard-favourite-box, .standard-props-box{
   background-color: coral;
