@@ -3,7 +3,7 @@ class EditPanelUI {
     //options
     this.localEditsPanelOptions = null;
 
-    this.currentActiveItem = null;
+    this.currentActiveItems = [];
     this.stayOnItem = null;
 
     //cross class instances
@@ -85,14 +85,24 @@ class EditPanelUI {
   }
 
 
-  getCurrentActiveItem() {
+  getCurrentActiveItems() {
     var t = this;
-    return t.currentActiveItem;
+    return t.currentActiveItems;
+  }
+
+  getCurrentActiveItem(index) {
+    var t = this;
+    return t.currentActiveItems[index];
   }
 
   setCurrentActiveItem(item) {
     var t = this;
-    t.currentActiveItem = item;
+    t.currentActiveItems.push(item);
+  }
+
+  clearCurrentActiveItems(){
+    var t = this;
+    t.currentActiveItems.splice(0);
   }
 
   targetCoreItem(activatedBy) {
@@ -115,11 +125,17 @@ class EditPanelUI {
 
   removeCoreItem() {
     var t = this;
-    var itemToRemove = t.getCurrentActiveItem();
-    var index = dataTranslator.coreStructureHolder.indexOf(itemToRemove);
-    dataTranslator.coreStructureHolder.splice(index, 1);
-    dataTranslator.rerenderPreview();
+    for(let item of t.currentActiveItems){
+      for(let item2 of dataTranslator.coreStructureHolder){
+        if(item == item2){
+          var index = dataTranslator.coreStructureHolder.indexOf(item2);
+          dataTranslator.coreStructureHolder.splice(index, 1);
+        }
+      }
   }
+    dataTranslator.rerenderPreview();
+    eventDirector.fullReset();
+}
 
   //core edit methods
   editElementSelected() {
@@ -143,7 +159,7 @@ class EditPanelUI {
           t.setStayOnItem($(this).attr('coreid'));
         } else {
           t.motherElementSelected($(this).attr('coreid'));
-          var existingStructureEntity = editPanelUI.getCurrentActiveItem();
+          var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
           existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
           dataTranslator.rerenderPreview();
         }
@@ -154,6 +170,7 @@ class EditPanelUI {
   }
 
   motherElementSelected(newMotherElement) {
+
     var newMotherElementCheck = parseInt(newMotherElement);
     if (typeof newMotherElementCheck === "number" && newMotherElement > 0) {
       $("div[coreid='" + newMotherElementCheck + "']").addClass('selectedMotherElement');

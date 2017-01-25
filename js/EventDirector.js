@@ -16,8 +16,7 @@ class EventDirector {
       stateManager.uniqueIdentifierInc();
       controlPanelUI.getUserData();
       dataTranslator.rerenderPreview();
-      t.clearProvisoryData();
-      controlPanelUI.clearMotherElement();
+      t.fullReset();
     }
 
     editModeSubmitSequence(){
@@ -32,6 +31,7 @@ class EventDirector {
 
     fullReset(){
       editPanelUI.editPanelClear();
+      editPanelUI.clearCurrentActiveItems();
       propsPanelUI.customPropertyAreaClear();
       dataTranslator.clearProvisoryClassArray();
       controlPanelUI.clearMotherElement();

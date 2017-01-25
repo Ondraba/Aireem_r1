@@ -108,11 +108,11 @@ class PropsPanelUI {
     var t = this;
     dataTranslator.setItemToProvisoryClassHolder(propertyValue);
     if (stateManager.getCurrentEditModeState() == true) {
-      var existingStructureEntity = editPanelUI.getCurrentActiveItem();
+      var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
       // existingStructureEntity.setMotherStructure(t.getMotherElement());
       if (existingStructureEntity != null) {
         dataTranslator.provisoryToCoreSwap(existingStructureEntity.classArray, dataTranslator.provisoryClassHolder);
-        editPanelUI.editPanelRerender(editPanelUI.getCurrentActiveItem());
+        editPanelUI.editPanelRerender(existingStructureEntity);
         dataTranslator.rerenderPreview();
         dataTranslator.clearProvisoryClassArray();
       } else {
