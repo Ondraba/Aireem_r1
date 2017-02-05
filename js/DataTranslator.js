@@ -76,26 +76,6 @@ class DataTranslator {
     for (let item of t.coreStructureHolder) {
       var coreIdVal = item.getCoreID();
       var motherIdVal = item.getMotherStructure();
-      // if(coreIdVal < motherIdVal){
-      //     for (let item2 of t.coreStructureHolder) {
-      //       if(item2.getCoreID() == motherIdVal){
-      //         let item1pos = dataTranslator.getCoreStructureHolder()[dataTranslator.getCoreStructureHolder().indexOf(item)];
-      //         let item2pos = dataTranslator.getCoreStructureHolder()[dataTranslator.getCoreStructureHolder().indexOf(item2)];
-      //         let temp = item2pos;
-      //         item2pos = item1pos;
-      //         item1pos = temp;
-      //
-      //         //blbost otocit t.corestruscutreholder(classArray[x]) mezi sebou navzajem
-      //
-      //         coreIdVal = item1pos.getCoreID();
-      //         motherIdVal = item2pos.getCoreID();
-      //         // item2 = item;
-      //         // item = temp;
-      //         console.log('item 1 je ' + temp.getCoreID());
-      //
-      //       }
-      //     }
-      //   }
       var coreItem = $("div[coreid='" + coreIdVal + "']");
       console.log('core' + coreItem);
       var motherItem = $("div[coreid='" + motherIdVal + "']");

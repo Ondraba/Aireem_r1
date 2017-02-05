@@ -170,7 +170,6 @@ class EditPanelUI {
   }
 
   motherElementSelected(newMotherElement) {
-
     var newMotherElementCheck = parseInt(newMotherElement);
     if (typeof newMotherElementCheck === "number" && newMotherElement > 0) {
       $("div[coreid='" + newMotherElementCheck + "']").addClass('selectedMotherElement');

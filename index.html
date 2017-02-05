@@ -81,8 +81,37 @@
 								<div class='row'>
 									<button type="button" class="btn btn-primary btn-block js_switch_to_edit">EDIT MODE</button>
 								</div>
+								<div class='row'>
+									<div id='structure-content'>
+
+									</div>
+								</div>
 							</div>
-							<div id='structure-content'>
+						</div>
+					</div>
+				</div>
+				<div class='col-sm-12 horizontal-disjoiner'>
+
+				</div>
+				<div id='result-content'>
+					<div class='row'>
+						<div class='col-sm-12'>
+							<div class='row'>
+								<div class='col-sm-2'>
+
+								</div>
+								<div class='col-sm-8 result-table'>
+									<div class='row'>
+										<div class='col-sm-4 result-toolbar'>
+										</div>
+										<div class='col-sm-8 result-showroom'>
+
+										</div>
+									</div>
+								</div>
+								<div class='col-sm-2'>
+
+								</div>
 							</div>
 						</div>
 					</div>
@@ -94,12 +123,14 @@
 	<!-- <script src="js/AppOptions.js"></script> -->
 	<script src="js/PropsPanelOptions.js"></script>
 	<script src="js/LayoutBuilderOptions.js"></script>
+	<script src="js/DictionaryOptions.js"></script>
 	<script src="js/StructureEntity.js"></script>
 	<script src="js/ControlPanelUI.js"></script>
 	<script src="js/Helpers.js"></script>
 	<script src="js/DataTranslator.js"></script>
 	<script src="js/PropsPanelUI.js"></script>
 	<script src="js/EditPanelUI.js"></script>
+	<script src="js/DictionaryEngine.js"></script>
 	<!-- <script src="js/PreviewPanelUI.js"></script> -->
 	<script src="js/StateManager.js"></script>
 	<script src="js/HistoryMem.js"></script>
@@ -107,6 +138,7 @@
 	<script>
 		var propsPanelOptions = new PropsPanelOptions();
 		var layoutBuilderOptions = new LayoutBuilderOptions();
+		var dictionaryOptions = new DictionaryOptions();
 		var helpers = new Helpers();
 		var structureEntity = new StructureEntity();
 		var dataTranslator = new DataTranslator();
@@ -114,6 +146,7 @@
 		var propsPanelUI = new PropsPanelUI();
 		var editPanelUI = new EditPanelUI();
 		var controlPanelUI = new ControlPanelUI();
+		var dictionaryEngine = new DictionaryEngine();
 		var historyMem = new HistoryMem();
 		// var previewPanelUI = new PreviewPanelUI();
 		var eventDirector = new EventDirector();

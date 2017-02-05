@@ -134,6 +134,7 @@ class ControlPanelUI {
     var newStructureEntity = new StructureEntity();
     newStructureEntity.setcoreID(stateManager.getUniqueIntentifier());
     newStructureEntity.setVersionID(stateManager.getCurrentVersion());
+    newStructureEntity.setType('div');
     dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray, dataTranslator.provisoryClassHolder);
     newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(), 'aireemDA');
     newStructureEntity.setMotherStructure(t.getMotherElement());

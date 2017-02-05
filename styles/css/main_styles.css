@@ -132,3 +132,27 @@ border: 2px solid white;
 .xs {
   background-color: orange;
 }
+
+
+.result-table{
+  background-color: grey;
+  min-height: 400px;
+  padding-top: 10px;
+  padding-right:10px;
+}
+
+.horizontal-disjoiner{
+  background-color: white;
+  height: 40px;
+}
+
+.result-toolbar{
+  background-color: white;
+  min-height: 360px;
+}
+
+
+.result-showroom{
+  background-color: white;
+  min-height: 360px;
+}

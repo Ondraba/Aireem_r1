@@ -9,9 +9,20 @@ class StructureEntity {
         this.classArray = [];
         this.attrMap = new Map();
         this.motherStructure = null;
+        this.type = null;
     }
 
     //getters
+    getType(){
+      var t = this;
+      return t.type;
+    }
+
+    setType(type){
+      var t = this;
+      t.type = type;
+    }
+
     getUniqeName() {
         return this.uniqueName;
     }
