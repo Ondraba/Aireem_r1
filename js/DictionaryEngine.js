@@ -65,41 +65,72 @@ class DictionaryEngine {
 
   coreTranslation(){
     var t = this;
+    t.clearTagArea();
     var coreStructureHolder = t.getCoreStructureHolder();
     var actualDictionaryContext = t.getActualDictionaryContext();
     var classesToTranslate = null;
     var initTagToTranslate = null;
     var closingTagToTranslate = null;
+    var motherId = null;
+    var coreid = null;
     for (var i = 0; i < coreStructureHolder.length; i++){
       for (var x = 0; x < actualDictionaryContext.length; x++){
           if (coreStructureHolder[i].getType() == actualDictionaryContext[x][0]){
             if (coreStructureHolder[i].classArray.length > 0){
-              classesToTranslate= coreStructureHolder[i].classArray.reduce(function(a, b) {
+              classesToTranslate = coreStructureHolder[i].classArray.reduce(function(a, b) {
                 return a + " " + b;
               });
+              console.log(classesToTranslate);
+            }
+            else{
+              classesToTranslate = "";
             }
             initTagToTranslate = actualDictionaryContext[x][1];
             closingTagToTranslate = actualDictionaryContext[x][2];
-            t.showTranslated(initTagToTranslate, closingTagToTranslate, classesToTranslate);
+            coreid = coreStructureHolder[i].getCoreID();
+            motherId = coreStructureHolder[i].getMotherStructure();
+            t.showTranslated(initTagToTranslate, closingTagToTranslate, classesToTranslate, coreid);
           }
       }
     }
+    t.appendControl();
   }
 
-
-
-  showTranslated(initTag, closingTag, classContent){
-    var initTagSpan = $(document.createElement('span'));
-    var classesSpan = $(document.createElement('span'));
-    var closingTagSpan = $(document.createElement('span'));
-    initTagSpan.text(initTag);
-    classesSpan.text(classContent);
-    closingTagSpan.text(closingTag);
-    $('.result-showroom').append(initTagSpan);
-    $('.result-showroom').append(classesSpan);
-      $('.result-showroom').append('">');
-    $('.result-showroom').append(closingTagSpan);
+//gui
+  showTranslated(initTag, closingTag, classContent, coreid){
+    var t = this;
+    var t = this;
+    var tagPacket = $(document.createElement('div')).addClass('js_tagPacket').attr('spanCoreId',coreid);
+    var initTagSpan = $(document.createElement('span')).text(initTag).attr('spanCoreId',coreid).addClass('js_initTag');
+    var classesSpan = $(document.createElement('span')).text(classContent).attr('spanCoreId',coreid).addClass('js_classesSpan');
+    var innerClosingTag =  $(document.createElement('span')).text('">').attr('spanCoreId',coreid).addClass('js_innerTag');
+    var closingTagSpan = $(document.createElement('span')).text(closingTag).attr('spanCoreId',coreid).addClass('js_closingSpan');
+    tagPacket.append(initTagSpan);
+    tagPacket.append(classesSpan);
+    tagPacket.append(innerClosingTag);
+    tagPacket.append(closingTagSpan);
+    $('.result-showroom').append(tagPacket);
   }
+
+  appendControl(){
+    var t = this;
+    var motherId = null;
+    var coreId = null;
+    var coreItemSpan = null;
+    var motherItemSpan = null;
+    for(let item of dataTranslator.coreStructureHolder){
+      coreId = item.getCoreID();
+      motherId = item.getMotherStructure();
+      var coreItemSpan = $(".js_tagPacket[spanCoreId='" +  coreId + "']").addClass('tagPacketInside');
+      var motherItemSpan = $(".js_innerTag[spanCoreId='" + motherId + "']");
+      motherItemSpan.append(coreItemSpan);
+    }
+  }
+
+  clearTagArea(){
+    var t = this;
+    $('.result-showroom').empty();
+  };
 
 
 }
