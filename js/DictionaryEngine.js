@@ -100,7 +100,7 @@ class DictionaryEngine {
   showTranslated(initTag, closingTag, classContent, coreid){
     var t = this;
     var t = this;
-    var tagPacket = $(document.createElement('div')).addClass('js_tagPacket').attr('spanCoreId',coreid);
+    var tagPacket = $(document.createElement('div')).addClass('js_tagPacket tagPacket').attr('spanCoreId',coreid);
     var initTagSpan = $(document.createElement('span')).text(initTag).attr('spanCoreId',coreid).addClass('js_initTag');
     var classesSpan = $(document.createElement('span')).text(classContent).attr('spanCoreId',coreid).addClass('js_classesSpan');
     var innerClosingTag =  $(document.createElement('span')).text('">').attr('spanCoreId',coreid).addClass('js_innerTag');
@@ -124,6 +124,7 @@ class DictionaryEngine {
       var coreItemSpan = $(".js_tagPacket[spanCoreId='" +  coreId + "']").addClass('tagPacketInside');
       var motherItemSpan = $(".js_innerTag[spanCoreId='" + motherId + "']");
       motherItemSpan.append(coreItemSpan);
+      // coreItemSpan.insertAfter(motherItemSpan);
     }
   }
 

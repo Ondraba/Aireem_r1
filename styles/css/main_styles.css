@@ -157,6 +157,11 @@ border: 2px solid white;
   min-height: 360px;
 }
 
+.tagPacket{
+  font-weight: bold;
+}
+
 .tagPacketInside{
   padding-left: 15px;
+  font-weight: lighter;
 }
