@@ -1,4 +1,4 @@
-.upper-index-header {
+/*.upper-index-header {
   min-height: 60px;
   background-color: #222222;
 }
@@ -16,18 +16,18 @@
 }
 .blue-title {
   color: #61dafb;
-}
-.user-input {
+}*/
+/*.user-input {
   padding-top: 20px;
   background-color: #2d2d2d;
   height: 600px;
-}
-.structure-map {
+}*/
+/*.structure-map {
   background-color: #2d2d2d;
   height: 600px;
   padding-top: 20px;
-}
-.disjoiner {
+/*}*/
+/*.disjoiner {
   height: 40px;
 }
 .form-group {
@@ -36,17 +36,17 @@
 .logo {
   padding-top: 20px;
   margin-left: -160px;
-}
-.white {
+}*/
+/*.white {
   color: white;
-}
-.structure-content {
+}*/*/
+/*.structure-content {
   padding: 40px;
-}
-.input-group {
+}*/
+/*.input-group {
   margin-bottom: 15px;
   float: left;
-}
+}*/
 .reviewBox {
   min-width: 60px;
   width: fit-content;
@@ -94,7 +94,7 @@ border: 2px solid white;
   margin-top: 5px;
   float:left;
 }
-.standard-favourite-box, .standard-props-box{
+/*.standard-favourite-box, .standard-props-box{
   background-color: coral;
   margin-right: 10px;
   margin-bottom: 5px;
@@ -122,7 +122,7 @@ border: 2px solid white;
   padding-right: 5px;
   text-align: center;
   float: left;
-}
+}*/
 
 
 
@@ -141,10 +141,10 @@ border: 2px solid white;
   padding-right:10px;
 }
 
-.horizontal-disjoiner{
+/*.horizontal-disjoiner{
   background-color: white;
   height: 40px;
-}
+}*/
 
 .result-toolbar{
   background-color: white;

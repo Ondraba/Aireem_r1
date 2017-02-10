@@ -201,6 +201,7 @@ class EditPanelUI {
       var newEditPropsPanelText = $(document.createElement('span'));
       newEditPropsPanel.attr('versionID', coreElementToEdit.getVersionID());
       newEditPropsPanel.addClass('js_edit_prop_box');
+      newEditPropsPanel.addClass('edit_prop_box');
       newEditPropsPanelText.text(item);
       newEditPropsPanel.append(newEditPropsPanelText);
       t.editPanel.append(newEditPropsPanel);

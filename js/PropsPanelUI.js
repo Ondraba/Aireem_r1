@@ -56,6 +56,24 @@ class PropsPanelUI {
     t.customPropsPanel.empty();
   }
 
+  fillPropsPanel() {
+    var t = this;
+    var activeProps = t.localOptions.getActiveProps();
+    if (activeProps.length != 0) {
+      for (let secondLevelObj of activeProps) {
+        if (t.favourites[secondLevelObj].length != 0) {
+          for (let i = 0; i < t.favourites[secondLevelObj].length; i++) {
+            t.newPropertyHTML(t.propsPanelMain, secondLevelObj, i, t.favourites, t.propsManipulator, 'beforeVersionConfirm');
+            if (i == t.favourites[secondLevelObj].length-1){
+              var disruptor =  $(document.createElement('div')).addClass('disruptor');
+              t.propsPanelMain.append(disruptor);
+            }
+          }
+        } else throw new Error('There is some inconsistency in PropsPanelOptions setting');
+      }
+    } else throw new Error('There are no favourites selected in PropsPanelOptions');
+  }
+
 
   rerenderCustomProps() {
     var t = this;
@@ -72,20 +90,6 @@ class PropsPanelUI {
       newCustomPropsPanel.append(newCustomPropsPanelText);
       editPanelUI.editPanel.append(newCustomPropsPanel);
     }
-  }
-
-  fillPropsPanel() {
-    var t = this;
-    var activeProps = t.localOptions.getActiveProps();
-    if (activeProps.length != 0) {
-      for (let secondLevelObj of activeProps) {
-        if (t.favourites[secondLevelObj].length != 0) {
-          for (let i = 0; i < t.favourites[secondLevelObj].length; i++) {
-            t.newPropertyHTML(t.propsPanelMain, secondLevelObj, i, t.favourites, t.propsManipulator, 'beforeVersionConfirm');
-          }
-        } else throw new Error('There is some inconsistency in PropsPanelOptions setting');
-      }
-    } else throw new Error('There are no favourites selected in PropsPanelOptions');
   }
 
 

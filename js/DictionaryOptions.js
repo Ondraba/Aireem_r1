@@ -1,4 +1,4 @@
-class DictionaryOptions {
+  class DictionaryOptions {
   constructor() {
     this.options = this.getDictionaryOptions();
   }

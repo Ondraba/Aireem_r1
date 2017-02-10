@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="styles/css/bless.css" />
 	<link rel="stylesheet" href="styles/css/main_styles.css" />
+	<link rel="stylesheet" href="styles/css/ui.css" />
 </head>
 
 <body>
@@ -17,17 +18,20 @@
 					<div class='col-sm-12 index-header'>
 						<div class='row'>
 							<div class='col-sm-4'></div>
-							<div class='col-sm-2'>
-								<div class='row'>
-									<h1 class='index-title'>Ai<span class='blue-title'>R</span>eem</h1>
+								<div class='col-sm-3'>
+									<div class='col-sm-10'>
+										<div class='row'>
+											<h1 class='index-title white'>Ai<span class='blue'>R</span>eem</h1>
+										</div>
+										<div class='row'>
+											<h5 class='blue bold'>Simple tool for your next responsive <span class='white'>[</span>layout<span class='white'>]</span></h5>
+										</div>
+									</div>
+									<div class='col-sm-2 logo'>
+										<img src='img/logo.png'>
+									</div>
 								</div>
-								<div class='row'>
-									<h5 class='index-sub-title'>Simple tool for your next responsive <span class='white'>[</span>layout<span class='white'>]</span></h5>
-								</div>
-							</div>
-							<div class='col-sm-1 logo'>
-								<img src='img/logo.png'>
-							</div>
+
 							<div class='col-sm-4'></div>
 						</div>
 					</div>
@@ -35,26 +39,17 @@
 			</header>
 			<div class='col-sm-12 disjoiner'></div>
 			<content>
+
+
 				<div class='col-sm-12'>
 					<div class="row">
 						<div class='col-sm-1'></div>
 						<div class='col-sm-4 user-input'>
-							<div class='col-sm-9'>
-								<!-- <div class="input-group">
-													<span class="input-group-addon" id="basic-addon1">Add name:</span>
-													<input type="text" class="form-control js_name-input" placeholder="Your unique element name" aria-describedby="basic-addon1">
-										</div> -->
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">Add classes:</span>
-									<input type="text" class="form-control js_class-input" placeholder="CSS class name" aria-describedby="basic-addon1">
-								</div>
-							</div>
-							<div class='col-sm-3'>
-								<button type="button" class="btn btn-primary btn-block js_class-button">Pridat tridu</button>
-								<button type="button" class="btn btn-primary btn-block js_sumbit_new_element">Pridat</button>
-								<button type="button" class="btn btn-primary btn-block js_remove_core_element">Smazat</button>
-							</div>
 							<div class='col-sm-12'>
+								<div class='button-area'>
+									<button type="button" class= "btn js_sumbit_new_element sumbit_new_element">ADD</button>
+									<button type="button" class="btn js_remove_core_element remove_core_element">X</button>
+								</div>
 								<hr />
 								<div class='edit-panel-main'>
 									<div class='row'>
@@ -69,7 +64,20 @@
 									<div class='row'>
 									</div>
 								</div>
+							<div class='row'>
+								<div class='col-sm-9'>
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">Add class:</span>
+										<input type="text" class="form-control js_class-input class-input" placeholder="CSS class name" aria-describedby="basic-addon1">
+									</div>
+								</div>
+								<div class='col-sm-3'>
+										<button type="button" class="btn btn-primary btn-block js_class-button class-button">></button>
+								</div>
 							</div>
+							</div>
+
+
 							<div class='col-sm-12'>
 								<div class='element-review'>
 								</div>

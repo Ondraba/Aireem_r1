@@ -1,0 +1,61 @@
+html :focus {
+  outline: 0px !important;
+}
+.main-container {
+  margin-top: 80px;
+}
+.cez-nadpis2 {
+  font-size: 1.5em;
+}
+.cez_orange {
+  color: #f24f00;
+}
+.cez_background_orange {
+  background-color: #f24f00;
+}
+.bold {
+  font-weight: bold;
+}
+.pd40 {
+  padding-top: 40px;
+}
+.standardColumn {
+  min-height: 500px;
+}
+.whiteColumn {
+  background-color: #FEFEFE;
+  min-height: 500px;
+}
+.bl {
+  background-color: white;
+  min-height: 80px;
+  padding-top: 15px;
+}
+.or {
+  background-color: orange;
+  min-height: 80px;
+}
+.boldLabel {
+  font-weight: bold;
+}
+.border-radius-null {
+  border-radius: 0;
+}
+.form-control,
+.form-control:focus {
+  border-color: #ebebeb;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+button,
+button:focus {
+  background-color: #f24f00;
+  border-radius: 0;
+  color: #ffffff;
+  border: none;
+}
+.countInbox {
+  width: 40px;
+}

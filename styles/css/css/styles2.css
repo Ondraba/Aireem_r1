@@ -1,0 +1,45 @@
+.main {
+  width: 800px;
+  height: 200px;
+  background-color: #d9edf7;
+}
+.levy,
+.pravy {
+  width: 50%;
+  height: 100px;
+  background-color: #00b3ee;
+  float: left;
+  padding: 25px;
+  box-sizing: border-box;
+}
+.levy h3,
+.pravy h3 {
+  text-shadow: 2px 2px 4px grey;
+}
+.pravy {
+  background-color: #1b6d85;
+}
+.tabulka {
+  margin-top: 60px ;
+}
+.tabulka tr td:nth-child(4),
+.tabulka tr td:nth-child(2),
+.tabulka tr td:nth-child(3),
+.tabulka tr td:nth-child(1) {
+  width: 80px;
+}
+.tabulka input {
+  height: 20px;
+}
+.pagination {
+  margin: 0;
+}
+.pagination_buttons button {
+  background-color: white;
+  color: gray;
+}
+@media (max-width: 768px) {
+  .paginator {
+    padding-bottom: -20px;
+  }
+}
