@@ -47,7 +47,7 @@ class EditPanelUI {
 
   setInitState() {
     var t = this;
-    $(t.editControl).text('Zapnout editaci');
+    $(t.editControl).text('EDIT');
   }
 
   activateEditMode() {
@@ -55,7 +55,7 @@ class EditPanelUI {
     $(t.editControl).on('click', function () {
       if (stateManager.getCurrentEditModeState() == false) {
         stateManager.setEditMode();
-        $(this).text('Vypnout editaci');
+        $(this).text('VIEW');
       } else {
         stateManager.disableEditMode();
         t.unsetStayOnItem();

@@ -4,9 +4,9 @@
 @baseDarkerPitch: #222222;
 @baseBlue: #61dafb;
 @standardWhite: #ffffff;
+@standardBlack: #000000;
 @bgrey: #f9f9f9;
 @bgrey2: #eeeeee;
-@standardBlack: #000000;
 @pinkDolphin: #cc7a6f;
 
 .color-set(@color){
@@ -27,6 +27,10 @@
 
 .black{
   color: @standardBlack;
+}
+
+.white{
+  color: @standardWhite;
 }
 
 //fonts
@@ -52,6 +56,8 @@ body{
   background-color: white;
   height: 40px;
 }
+
+
 
 //header
 
@@ -83,8 +89,9 @@ body{
 	color: @baseBlue;
 }
 
-//propsPanel
 
+
+//propsPanel
 .user-input{
   background-color:  @bgrey2;
   padding-left: 20px;
@@ -106,7 +113,8 @@ body{
   height: 40px;
 }
 
-.standard-props-box{
+
+.custom-props-box, .edit_prop_box, .standard-favourite-box, .standard-props-box{
   background-color: @bgrey2;
   border-radius: 0px;
   border: 3px solid white;
@@ -122,36 +130,9 @@ body{
   margin-bottom: 5px;
 }
 
-.standard-favourite-box{
-  background-color: @bgrey2;
-  border-radius: 0px;
-  border: 3px solid white;
-  font-weight: bold;
-  width: 100px;
-  height: 40px;
-  float: left;
-  padding-top: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-  margin-right: 10px;
-  margin-bottom: 5px;
-}
-
-.custom-props-box, .edit_prop_box{
-  background-color: @bgrey2;
-  border-radius: 0px;
-  border: 3px solid white;
-  font-weight: bold;
-  width: 100px;
-  height: 40px;
-  float: left;
-  padding-top: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-  margin-right: 10px;
-  margin-bottom: 5px;
+.edit_prop_box, .custom-props-box{
+  border: 3px solid @pinkDolphin;
+  color: @pinkDolphin;
 }
 
 .edit_prop_box:hover, .custom-props-box:hover {
@@ -221,7 +202,7 @@ body{
 }
 
 .sumbit_new_element:hover, .remove_core_element:hover,{
-  border-right: 3 px solid white;
+    border: 3px solid coral;
 }
 
 
@@ -233,4 +214,125 @@ body{
   min-height: 1000px;
   background-color: @bgrey2;
   padding-top: 20px;
+}
+
+//review panel
+
+.switch_to_edit{
+  width: 100px;
+  border-radius: 0px;
+  background: @pinkDolphin;
+  height: 60px;
+  border: none;
+  color: @standardBlack;
+  .bold;
+  float:right;
+  margin-right: 10px;
+}
+
+.switch_to_edit:hover{
+  border: 3px solid coral;
+  background-color: @pinkDolphin;
+  color: @standardBlack;
+}
+
+.review-menu{
+  margin-bottom:300px;
+  float:left;
+}
+
+.structure-content{
+  margin-top: 300px;
+  float:left;
+}
+
+.standardDiv {
+  min-height: 80px;
+  background-color: #d9e6f2;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-top: 5px;
+  border: 2px solid @standardWhite;
+  float:left;
+}
+
+.standardDiv:hover{
+  border: 4px solid @standardWhite;
+}
+
+.innerDiv:hover{
+  border: 4px solid @standardWhite;
+}
+
+.innerDiv {
+  min-height: 30px;
+  background-color: @pinkDolphin;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  border: 2px solid @standardWhite;
+  margin-top: 5px;
+  float:left;
+}
+
+.preexist{
+  min-height: 80px;
+  background-color: #d9e6f2;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.selectedMotherElement{
+border:4px solid @baseBlue;
+color:  @baseBlue;
+}
+
+.elementDescribe{
+  .bold;
+  display: block;
+}
+
+.result-showroom{
+  background-color: @bgrey2;
+  min-height: 600px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.result-table{
+  min-height: 600px;
+  padding-top: 10px;
+  padding-right:10px;
+}
+
+//dictionary
+
+.declartion-span{
+  display: block;
+}
+
+.result-title{
+  background-color: @pinkDolphin;
+  .bold;
+  padding-left: 20px;
+}
+
+.result-toolbar{
+  background-color: white;
+  min-height: 360px;
+}
+
+
+
+.tagPacket{
+  font-weight: bold;
+}
+
+.tagPacketInside{
+  padding-left: 15px;
+  font-weight: lighter;
+}
+
+.foooter{
+  margin-top: 100px;
 }

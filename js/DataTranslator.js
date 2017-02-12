@@ -95,10 +95,13 @@ class DataTranslator {
     var colSizeCheck = 'col-sm-12';
     for (let item of t.coreStructureHolder) {
       var newPreviewElement = $(document.createElement('div'));
+      var newPreviewElementDescribe = $(document.createElement('span'));
       newPreviewElement.attr('coreid', item.getCoreID());
       newPreviewElement.attr('versionID', item.getVersionID());
       newPreviewElement.addClass(colSizeCheck);
       newPreviewElement.addClass('js_selectableDiv');
+      newPreviewElementDescribe.text('<' + item.getType() + '>').addClass('elementDescribe');
+      newPreviewElement.append(newPreviewElementDescribe);
       for (let itemClass of item.classArray) {
         if (item.classArray.length != 0) {
           newPreviewElement.addClass(itemClass);
@@ -113,6 +116,7 @@ class DataTranslator {
       $('#' + layoutBuilderOptions.options.coreStructureElements.defaultMotherElement).append(newPreviewElement);
 
       t.rerenderMothersAndChilds();
+      dictionaryEngine.coreTranslation();
     }
   }
 

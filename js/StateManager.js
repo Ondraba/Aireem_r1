@@ -24,6 +24,7 @@ class StateManager {
   setEditMode() {
     var t = this;
     t.editMode = true;
+    controlPanelUI.switchToEditMode();
   }
 
   disableEditMode() {

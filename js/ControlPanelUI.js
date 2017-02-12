@@ -119,7 +119,12 @@ class ControlPanelUI {
 
   switchToStandardMode() {
     var t = this;
-    t.userInteractionTrigger.text('Pridej');
+    t.userInteractionTrigger.text('ADD');
+  }
+
+  switchToEditMode() {
+    var t = this;
+    t.userInteractionTrigger.text('SET');
   }
 
   getEditUserData() {
