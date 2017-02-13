@@ -99,7 +99,7 @@ class DataTranslator {
       newPreviewElement.attr('coreid', item.getCoreID());
       newPreviewElement.attr('versionID', item.getVersionID());
       newPreviewElement.addClass(colSizeCheck);
-      newPreviewElement.addClass('js_selectableDiv');
+      newPreviewElement.addClass('js_selectableDiv dropableDiv');
       newPreviewElementDescribe.text('<' + item.getType() + '>').addClass('elementDescribe');
       newPreviewElement.append(newPreviewElementDescribe);
       for (let itemClass of item.classArray) {

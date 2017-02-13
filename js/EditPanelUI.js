@@ -1,6 +1,7 @@
 class EditPanelUI {
   constructor() {
     //options
+
     this.localEditsPanelOptions = null;
 
     this.currentActiveItems = [];
@@ -32,8 +33,12 @@ class EditPanelUI {
     t.editRemoveConfirm();
     t.activateEditMode();
     t.setInitState();
+    t.dragAndDropListener();
     t.dragPreviewElement();
-    t.dropPreviewElement();
+  }
+
+  globalT(){
+    return this;
   }
 
   editPanelAreas() {
@@ -215,18 +220,80 @@ class EditPanelUI {
     $('.dragable').draggable();
   }
 
-  dropPreviewElement(){
+dragAndDropListener() {
     var t = this;
-    $('.droppable').droppable({
-      drop: function(event, ui){
-        var elementAtPoint = document.elementFromPoint(event.pageX-1, event.pageY-1);
-        if (!$.contains($('.droppable')[0], elementAtPoint)) {
-        return;
+    $("body").on("DOMNodeInserted", ".standardDiv", t.makeDraggable);
+    $("body").on("DOMNodeInserted", ".standardDiv", t.makeDroppable);
+}
+
+makeDroppable() {
+    var self = editPanelUI;
+    var t = this; //now this in not global, belongs to listener
+    console.log('t je' +t);
+  	$(t).droppable();
+    $(".dropableDiv").droppable({
+      drop: function(e, ui){
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
+        console.log($(this));
+        if (stateManager.getCurrentEditModeState() == false){
+          editPanelUI.motherElementSelected($(this).attr('coreID'));
+          eventDirector.standardModeSubmitSequence();
+          $('#drag-targeter').css({ left: 0, top: 0 });
+          console.log(t);
         }
-        console.log('pes');
+        else{
+          editPanelUI.motherElementSelected($(this).attr('coreid'));
+          var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
+          existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
+          dataTranslator.rerenderPreview();
+          // $('#drag-targeter').css({ left: 0, top: 0 });
         }
-    });
-  }
+        $('#drag-targeter').css({ left: 0, top: 0 });
+   }
+ });
+}
+  makeDraggable() {
+	   $(this).draggable();
+    //  let targetCoreItem = editPanelUI.targetCoreItem($(this));
+   }
+
+
+  //   var t = this;
+  //   $('.droppable').droppable({
+  //     greedy:true,
+  //     drop: function(event, ui){
+  //       // if (!event) var event = window.event;
+  //       // event.cancelBubble = true;
+  //       var elementAtPoint = document.elementFromPoint(event.pageX-1, event.pageY-1);
+   //
+  //  if (!$.contains($('.droppable')[0], elementAtPoint)) {
+  //    // not really meant for this element
+  //    console.log('zase');
+  //    return;
+  //  }
+   //
+  //  // handle drop for this element
+  //  console.log('prase');
+
+
+
+          // if (stateManager.getCurrentEditModeState() == false){
+          //   if($(this).attr('id') == 'structure-content'){
+          //       eventDirector.standardModeSubmitSequence();
+          //         console.log(this);
+          //   }
+          //   else{
+          //     console.log('kurva');
+          //   }
+        //   // }
+        //   $('#drag-targeter').css({ left: 0, top: 0 });
+        // console.log('pes');
+  //       // }
+  //   });
+  // }
+
 
 
   // $(document).on('click', t.editActivator, function (e) {
