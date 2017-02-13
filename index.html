@@ -51,6 +51,16 @@
 									<button type="button" class= "btn js_sumbit_new_element sumbit_new_element">ADD</button>
 									<button type="button" class="btn js_remove_core_element remove_core_element">X</button>
 								</div>
+								<div class='drag-area'>
+									<div class='col-sm-6'>
+										<div class='dragable'>
+											Drag here!
+										</div>
+									</div>
+									<div class='col-sm-6'>
+										<div class='dragable-describe'>Drag your element to canvas area.</div>
+								 </div>
+							 </div>
 								<hr />
 								<div class='edit-panel-main'>
 									<div class='row'>
@@ -88,7 +98,7 @@
 						<div class='col-sm-5 structure-map'>
 							<div class="col-sm-12">
 								<div class='row'>
-									<div id='structure-content'>
+									<div id='structure-content' class='droppable'>
 
 									</div>
 								</div>
@@ -138,6 +148,7 @@
 		</div>
 	</div>
 	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<!-- <script src="js/AppOptions.js"></script> -->
 	<script src="js/PropsPanelOptions.js"></script>
 	<script src="js/LayoutBuilderOptions.js"></script>

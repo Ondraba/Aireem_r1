@@ -95,7 +95,7 @@ body{
 .user-input{
   background-color:  @bgrey2;
   padding-left: 20px;
-  min-height: 1000px;
+  min-height: 1200px;
   padding-top: 20px;
 }
 
@@ -113,6 +113,13 @@ body{
   height: 40px;
 }
 
+.favourites-area{
+  margin-top: 50px;
+}
+
+.edit-panel-main{
+  margin-top: 200px;
+}
 
 .custom-props-box, .edit_prop_box, .standard-favourite-box, .standard-props-box{
   background-color: @bgrey2;
@@ -211,9 +218,29 @@ body{
 //editPanel
 
 .structure-map{
-  min-height: 1000px;
+  min-height: 1200px;
   background-color: @bgrey2;
   padding-top: 20px;
+}
+
+.dragable{
+  width: 100%;
+  height: 120px;
+  background-color: @baseBlue;
+  border: 3px solid @standardWhite;
+  border-style: dashed;
+  padding-left: 30%;
+  padding-top: 50px;
+  .bold;
+  z-index: 1;
+}
+
+.dragable:hover{
+  color: @standardWhite;
+}
+
+.dragable-describe{
+  .bold;
 }
 
 //review panel
@@ -241,9 +268,9 @@ body{
   float:left;
 }
 
-.structure-content{
-  margin-top: 300px;
-  float:left;
+#structure-content{
+  width: 100%;
+  height: 1200px;
 }
 
 .standardDiv {
@@ -304,6 +331,8 @@ color:  @baseBlue;
   padding-top: 10px;
   padding-right:10px;
 }
+
+
 
 //dictionary
 

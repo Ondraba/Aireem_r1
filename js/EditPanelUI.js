@@ -32,6 +32,8 @@ class EditPanelUI {
     t.editRemoveConfirm();
     t.activateEditMode();
     t.setInitState();
+    t.dragPreviewElement();
+    t.dropPreviewElement();
   }
 
   editPanelAreas() {
@@ -207,6 +209,39 @@ class EditPanelUI {
       t.editPanel.append(newEditPropsPanel);
     }
   }
+
+  dragPreviewElement(){
+    $('.dragable').attr('coreID','Before confirm.');
+    $('.dragable').draggable();
+  }
+
+  dropPreviewElement(){
+    var t = this;
+    $('.droppable').droppable({
+      drop: function(event, ui){
+        var elementAtPoint = document.elementFromPoint(event.pageX-1, event.pageY-1);
+        if (!$.contains($('.droppable')[0], elementAtPoint)) {
+        return;
+        }
+        console.log('pes');
+        }
+    });
+  }
+
+
+  // $(document).on('click', t.editActivator, function (e) {
+
+ //  $( function() {
+ //   $( "#draggable" ).draggable();
+ //   $( "#droppable" ).droppable({
+ //     drop: function( event, ui ) {
+ //       $( this )
+ //         .addClass( "ui-state-highlight" )
+ //         .find( "p" )
+ //           .html( "Dropped!" );
+ //     }
+ //   });
+ // } );
 
   editPanelClear() {
     var t = this;

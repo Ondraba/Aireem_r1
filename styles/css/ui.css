@@ -51,7 +51,7 @@ body {
 .user-input {
   background-color: #eeeeee;
   padding-left: 20px;
-  min-height: 1000px;
+  min-height: 1200px;
   padding-top: 20px;
 }
 .custom-props-area {
@@ -64,6 +64,12 @@ body {
 .button-area {
   margin-bottom: 40px;
   height: 40px;
+}
+.favourites-area {
+  margin-top: 50px;
+}
+.edit-panel-main {
+  margin-top: 200px;
 }
 .custom-props-box,
 .edit_prop_box,
@@ -150,9 +156,26 @@ body {
   border: 3px solid coral;
 }
 .structure-map {
-  min-height: 1000px;
+  min-height: 1200px;
   background-color: #eeeeee;
   padding-top: 20px;
+}
+.dragable {
+  width: 100%;
+  height: 120px;
+  background-color: #61dafb;
+  border: 3px solid #ffffff;
+  border-style: dashed;
+  padding-left: 30%;
+  padding-top: 50px;
+  font-weight: bold;
+  z-index: 1;
+}
+.dragable:hover {
+  color: #ffffff;
+}
+.dragable-describe {
+  font-weight: bold;
 }
 .switch_to_edit {
   width: 100px;
@@ -174,9 +197,9 @@ body {
   margin-bottom: 300px;
   float: left;
 }
-.structure-content {
-  margin-top: 300px;
-  float: left;
+#structure-content {
+  width: 100%;
+  height: 1200px;
 }
 .standardDiv {
   min-height: 80px;
