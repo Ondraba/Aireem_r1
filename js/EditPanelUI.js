@@ -35,6 +35,7 @@ class EditPanelUI {
     t.setInitState();
     t.dragAndDropListener();
     t.dragPreviewElement();
+    t.selectableElementDrop('structure-content');
   }
 
   globalT(){
@@ -63,11 +64,13 @@ class EditPanelUI {
       if (stateManager.getCurrentEditModeState() == false) {
         stateManager.setEditMode();
         $(this).text('VIEW');
+        $('.drag-area').hide();
       } else {
         stateManager.disableEditMode();
         t.unsetStayOnItem();
         t.setInitState();
         eventDirector.fullReset();
+        $('.drag-area').show();
       }
     });
   }
@@ -159,8 +162,9 @@ class EditPanelUI {
       let targetCoreItem = t.targetCoreItem(this);
       controlPanelUI.setNewMotherElement(targetCoreItem.getMotherStructure());
       //event propagation settings - document.captureEvents(Event.CLICK); vs on('click') bubbling
-      if (stateManager.getCurrentEditModeState() == true) {
+      if (stateManager.getCurrentEditModeState() == true){
         if (t.getStayOnItem() == null) {
+          $(this).addClass('edit-selected');
           stateManager.setGlobalVersionRelease($(this).attr('versionID'));
           t.editPanelRerender(targetCoreItem);
           t.setStayOnItem($(this).attr('coreid'));
@@ -215,9 +219,9 @@ class EditPanelUI {
     }
   }
 
-  dragPreviewElement(){
-    $('.dragable').attr('coreID','Before confirm.');
-    $('.dragable').draggable();
+dragPreviewElement(){
+   $('.dragable').attr('coreID','Before confirm.');
+   $('.dragable').draggable();
   }
 
 dragAndDropListener() {
@@ -226,29 +230,41 @@ dragAndDropListener() {
     $("body").on("DOMNodeInserted", ".standardDiv", t.makeDroppable);
 }
 
+selectableElementDrop(element) {
+    var self = editPanelUI;
+  	$('#'+ element).droppable();
+    $('#'+ element).droppable({
+      greedy: true,
+      drop: function(e, ui){
+        if(stateManager.getCurrentEditModeState() == false){
+        eventDirector.standardModeSubmitSequence();
+        $('#drag-targeter').css({ left: 0, top: 0 });
+        }
+        else{
+        $('#drag-targeter').css({ left: 0, top: 0 });
+        }
+   }
+ });
+}
+
 makeDroppable() {
     var self = editPanelUI;
-    var t = this; //now this in not global, belongs to listener
-    console.log('t je' +t);
-  	$(t).droppable();
+  	$(this).droppable();
     $(".dropableDiv").droppable({
+      greedy: true,
       drop: function(e, ui){
         if (!e) var e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
-        console.log($(this));
         if (stateManager.getCurrentEditModeState() == false){
           editPanelUI.motherElementSelected($(this).attr('coreID'));
           eventDirector.standardModeSubmitSequence();
-          $('#drag-targeter').css({ left: 0, top: 0 });
-          console.log(t);
         }
         else{
           editPanelUI.motherElementSelected($(this).attr('coreid'));
           var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
           existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
           dataTranslator.rerenderPreview();
-          // $('#drag-targeter').css({ left: 0, top: 0 });
         }
         $('#drag-targeter').css({ left: 0, top: 0 });
    }
@@ -256,59 +272,14 @@ makeDroppable() {
 }
   makeDraggable() {
 	   $(this).draggable();
-    //  let targetCoreItem = editPanelUI.targetCoreItem($(this));
+     $(".dropableDiv").draggable({
+       drag: function(e, ui){
+           editPanelUI.targetCoreItem(this);
+       }
+     });
    }
 
 
-  //   var t = this;
-  //   $('.droppable').droppable({
-  //     greedy:true,
-  //     drop: function(event, ui){
-  //       // if (!event) var event = window.event;
-  //       // event.cancelBubble = true;
-  //       var elementAtPoint = document.elementFromPoint(event.pageX-1, event.pageY-1);
-   //
-  //  if (!$.contains($('.droppable')[0], elementAtPoint)) {
-  //    // not really meant for this element
-  //    console.log('zase');
-  //    return;
-  //  }
-   //
-  //  // handle drop for this element
-  //  console.log('prase');
-
-
-
-          // if (stateManager.getCurrentEditModeState() == false){
-          //   if($(this).attr('id') == 'structure-content'){
-          //       eventDirector.standardModeSubmitSequence();
-          //         console.log(this);
-          //   }
-          //   else{
-          //     console.log('kurva');
-          //   }
-        //   // }
-        //   $('#drag-targeter').css({ left: 0, top: 0 });
-        // console.log('pes');
-  //       // }
-  //   });
-  // }
-
-
-
-  // $(document).on('click', t.editActivator, function (e) {
-
- //  $( function() {
- //   $( "#draggable" ).draggable();
- //   $( "#droppable" ).droppable({
- //     drop: function( event, ui ) {
- //       $( this )
- //         .addClass( "ui-state-highlight" )
- //         .find( "p" )
- //           .html( "Dropped!" );
- //     }
- //   });
- // } );
 
   editPanelClear() {
     var t = this;
