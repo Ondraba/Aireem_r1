@@ -72,7 +72,6 @@ class HistoryMem {
       var t = this;
       if(Array.isArray(arr)){
           t.coreHistory.push([ ...arr, newEntry ]);
-          console.log('bbbb');
       }
       else{
         throw new Error('History can accept only objects typeof array');
