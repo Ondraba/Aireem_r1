@@ -31,11 +31,19 @@ class HistoryMem {
     prevVersion() {
       var t = this;
       t.prevVersionSubmit.on('click', function () {
-        if(dataTranslator.getCoreStructureHolder().length > 0){
-        var appCoreState = dataTranslator.getCoreStructureHolder();
-        appCoreState.pop();
-        dataTranslator.rerenderPreview();
+        if((dataTranslator.getCoreStructureHolder().length) > 0){
+          var appCoreState = dataTranslator.getCoreStructureHolder();
+          var currentHistoryIndex = appCoreState.length - 1;
+              console.log('curh' + currentHistoryIndex);
+          var historyStamp = t.getCoreHistory()[currentHistoryIndex - 1];
+          dataTranslator.coreStructureHolder = historyStamp;
+          console.log('hs' + historyStamp);
+          dataTranslator.rerenderPreview();
         }
+        // else if((dataTranslator.getCoreStructureHolder().length) == 1){
+        //   dataTranslator.coreStructureHolder.splice(0);
+        //   dataTranslator.rerenderPreview();
+        // }
         else{
           console.log('History core limit cant be set below 0');
         }
@@ -46,11 +54,12 @@ class HistoryMem {
       var t = this;
       t.nextVersionSubmit.on('click', function () {
         if(t.getCoreHistory().length > dataTranslator.getCoreStructureHolder().length){
-        var appCoreState = dataTranslator.getCoreStructureHolder();
-        var currentHistoryIndex = appCoreState.length - 1;
-        var futureStamp = t.getCoreHistory()[currentHistoryIndex + 1];
-        dataTranslator.coreStructureHolder = futureStamp;
-        dataTranslator.rerenderPreview();
+          var appCoreState = dataTranslator.getCoreStructureHolder();
+          var currentHistoryIndex = appCoreState.length - 1;
+          console.log('cur' + currentHistoryIndex);
+          var futureStamp = t.getCoreHistory()[currentHistoryIndex + 1];
+          dataTranslator.coreStructureHolder = futureStamp;
+          dataTranslator.rerenderPreview();
         }
         else{
           console.log('History core limit cant see the future!')
@@ -76,6 +85,10 @@ class HistoryMem {
       else{
         throw new Error('History can accept only objects typeof array');
       }
+    }
+
+    immutableArrayRetention(array){
+      return [...array];
     }
 
    immutablePush(arr, newEntry){

@@ -172,6 +172,8 @@ class EditPanelUI {
           t.motherElementSelected($(this).attr('coreid'));
           var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
           existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
+          historyMem.coreHistory.push(historyMem.immutableArrayRetention(dataTranslator.getCoreStructureHolder()));
+          console.log('praseee');
           dataTranslator.rerenderPreview();
         }
       } else {
