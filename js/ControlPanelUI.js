@@ -143,6 +143,7 @@ class ControlPanelUI {
     dataTranslator.provisoryToCoreSwap(newStructureEntity.classArray, dataTranslator.provisoryClassHolder);
     newStructureEntity.pushToAttrMap(stateManager.getUniqueIntentifier(), 'aireemDA');
     newStructureEntity.setMotherStructure(t.getMotherElement());
+    historyMem.immutableArrayStamp(dataTranslator.coreStructureHolder,newStructureEntity);
     eventDirector.saveNewStructureEntity(newStructureEntity);
   }
 

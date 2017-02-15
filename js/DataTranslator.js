@@ -114,7 +114,6 @@ class DataTranslator {
       }
       // newPreviewElement.addClass('preexist');
       $('#' + layoutBuilderOptions.options.coreStructureElements.defaultMotherElement).append(newPreviewElement);
-
       t.rerenderMothersAndChilds();
       dictionaryEngine.coreTranslation();
     }

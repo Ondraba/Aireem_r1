@@ -13,6 +13,7 @@ class HistoryMem {
         var t = this;
         t.controlDefinition();
         t.prevVersion();
+        t.nextVersion();
     }
 
     controlDefinition(){
@@ -21,14 +22,39 @@ class HistoryMem {
       t.prevVersionSubmit = $('.js_prev-version-button');
     }
 
+    getCoreHistory(){
+      var t = this;
+      return t.coreHistory;
+    }
+
 
     prevVersion() {
       var t = this;
       t.prevVersionSubmit.on('click', function () {
-        console.log('ehm');
+        if(dataTranslator.getCoreStructureHolder().length > 0){
         var appCoreState = dataTranslator.getCoreStructureHolder();
         appCoreState.pop();
         dataTranslator.rerenderPreview();
+        }
+        else{
+          console.log('History core limit cant be set below 0');
+        }
+      });
+    }
+
+    nextVersion(){
+      var t = this;
+      t.nextVersionSubmit.on('click', function () {
+        if(t.getCoreHistory().length > dataTranslator.getCoreStructureHolder().length){
+        var appCoreState = dataTranslator.getCoreStructureHolder();
+        var currentHistoryIndex = appCoreState.length - 1;
+        var futureStamp = t.getCoreHistory()[currentHistoryIndex + 1];
+        dataTranslator.coreStructureHolder = futureStamp;
+        dataTranslator.rerenderPreview();
+        }
+        else{
+          console.log('History core limit cant see the future!')
+        }
       });
     }
 
@@ -36,6 +62,17 @@ class HistoryMem {
       var t = this;
       if(Array.isArray(historyArray)){
           t.coreHistory.push(historyArray);
+      }
+      else{
+        throw new Error('History can accept only objects typeof array');
+      }
+    }
+
+    immutableArrayStamp(arr, newEntry){
+      var t = this;
+      if(Array.isArray(arr)){
+          t.coreHistory.push([ ...arr, newEntry ]);
+          console.log('bbbb');
       }
       else{
         throw new Error('History can accept only objects typeof array');
