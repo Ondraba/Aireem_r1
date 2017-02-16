@@ -1,6 +1,9 @@
 class HistoryMem {
     constructor() {
       this.coreHistory = [];
+      this.stepQueue = 1;
+      this.queue = false;
+      this.historyChanged = false;
 
       //controlls
       this.nextVersionSubmit = null;
@@ -27,23 +30,39 @@ class HistoryMem {
       return t.coreHistory;
     }
 
+    getStepQueque(){
+      var t = this;
+      return t.stepQueue;
+    }
+
+    getQueque(){
+      var t = this;
+      return t.queue;
+    }
+
+    setQueque(){
+      var t = this;
+      t.queue = true;
+    }
+
+    incStepQueque(){
+      var t = this;
+      t.stepQueue++;
+    }
+
 
     prevVersion() {
       var t = this;
       t.prevVersionSubmit.on('click', function () {
         if((dataTranslator.getCoreStructureHolder().length) > 0){
+          t.historyChanged = true;
           var appCoreState = dataTranslator.getCoreStructureHolder();
           var currentHistoryIndex = appCoreState.length - 1;
-              console.log('curh' + currentHistoryIndex);
           var historyStamp = t.getCoreHistory()[currentHistoryIndex - 1];
-          dataTranslator.coreStructureHolder = historyStamp;
-          console.log('hs' + historyStamp);
+          var immunate = t.immunate(historyStamp);
+          dataTranslator.coreStructureHolder = immunate;
           dataTranslator.rerenderPreview();
         }
-        // else if((dataTranslator.getCoreStructureHolder().length) == 1){
-        //   dataTranslator.coreStructureHolder.splice(0);
-        //   dataTranslator.rerenderPreview();
-        // }
         else{
           console.log('History core limit cant be set below 0');
         }
@@ -56,9 +75,9 @@ class HistoryMem {
         if(t.getCoreHistory().length > dataTranslator.getCoreStructureHolder().length){
           var appCoreState = dataTranslator.getCoreStructureHolder();
           var currentHistoryIndex = appCoreState.length - 1;
-          console.log('cur' + currentHistoryIndex);
           var futureStamp = t.getCoreHistory()[currentHistoryIndex + 1];
-          dataTranslator.coreStructureHolder = futureStamp;
+          var immunate = t.immunate(futureStamp);
+          dataTranslator.coreStructureHolder = immunate;
           dataTranslator.rerenderPreview();
         }
         else{
@@ -88,7 +107,13 @@ class HistoryMem {
     }
 
     immutableArrayRetention(array){
-      return [...array];
+        var t = this;
+        t.coreHistory.push([...array]);
+    }
+
+    immunate(array){
+        var t = this;
+        return ([...array]);
     }
 
    immutablePush(arr, newEntry){
