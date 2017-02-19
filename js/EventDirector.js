@@ -70,7 +70,8 @@ class EventDirector {
 
     saveNewStructureEntity(newStructureEntity){
       var t = this;
-      dataTranslator.setItemToCoreStructureHolder(newStructureEntity);
+      var immutate = historyMem.immutateSingleOne(newStructureEntity);
+      dataTranslator.setItemToCoreStructureHolder(immutate);
     }
 
     clearProvisoryData(){

@@ -110,7 +110,9 @@ class PropsPanelUI {
 
   propertySelected(propertyValue) {
     var t = this;
-    dataTranslator.setItemToProvisoryClassHolder(propertyValue);
+
+    dataTranslator.setItemToProvisoryClassHolder(propertyValue);//important
+
     if (stateManager.getCurrentEditModeState() == true) {
       var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
       // existingStructureEntity.setMotherStructure(t.getMotherElement());

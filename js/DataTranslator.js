@@ -9,6 +9,11 @@ class DataTranslator {
     return t.coreStructureHolder;
   }
 
+  clearCoreStructureHolder(){
+    var t = this;
+    t.coreStructureHolder.splice(0);
+  }
+
   getSingleCoreStructureHolderItem(index) {
     var t = this;
     return t.coreStructureHolder[index];
@@ -93,13 +98,14 @@ class DataTranslator {
     var t = this;
     controlPanelUI.clearPreviewArea();
     var colSizeCheck = 'col-sm-12';
-    for (let item of t.coreStructureHolder) {
+    var iCoreStructureHolder = historyMem.immutateWholeState();
+    for (let item of iCoreStructureHolder) {
       var newPreviewElement = $(document.createElement('div'));
       var newPreviewElementDescribe = $(document.createElement('span'));
       newPreviewElement.attr('coreid', item.getCoreID());
       newPreviewElement.attr('versionID', item.getVersionID());
       newPreviewElement.addClass(colSizeCheck);
-      newPreviewElement.addClass('js_selectableDiv dropableDiv');
+      newPreviewElement.addClass('js_selectableDiv dropableDiv  ');
       newPreviewElementDescribe.text('<' + item.getType() + '>').addClass('elementDescribe');
       newPreviewElement.append(newPreviewElementDescribe);
       for (let itemClass of item.classArray) {
@@ -114,9 +120,15 @@ class DataTranslator {
       }
       // newPreviewElement.addClass('preexist');
       $('#' + layoutBuilderOptions.options.coreStructureElements.defaultMotherElement).append(newPreviewElement);
+    }
       t.rerenderMothersAndChilds();
       dictionaryEngine.coreTranslation();
-    }
+
+      if (!historyMem.historyExcludePoint){
+      historyMem.incHistoryPosition();
+      historyMem.coreStructureHolderImmunate();
+      }
+      historyMem.historyInclude();
   }
 
 }

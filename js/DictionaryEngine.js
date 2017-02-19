@@ -21,6 +21,7 @@ class DictionaryEngine {
 
   getCoreStructureHolder(){
     var t = this;
+    t.loadCoreStructureHolder();
     return t.coreStructureHolder;
   }
 
@@ -138,6 +139,7 @@ class DictionaryEngine {
             coreid = coreStructureHolder[i].getCoreID();
             motherId = coreStructureHolder[i].getMotherStructure();
             t.showTranslated(initTagToTranslate, closingTagToTranslate, classesToTranslate, coreid);
+            console.log(coreStructureHolder);
           }
       }
     }

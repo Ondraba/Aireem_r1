@@ -65,12 +65,14 @@ class EditPanelUI {
         stateManager.setEditMode();
         $(this).text('VIEW');
         $('.drag-area').hide();
+        $('.js_sumbit_new_element').hide();
       } else {
         stateManager.disableEditMode();
         t.unsetStayOnItem();
         t.setInitState();
         eventDirector.fullReset();
         $('.drag-area').show();
+        $('.js_sumbit_new_element').show();
       }
     });
   }
@@ -172,8 +174,6 @@ class EditPanelUI {
           t.motherElementSelected($(this).attr('coreid'));
           var existingStructureEntity = editPanelUI.getCurrentActiveItem(editPanelUI.getCurrentActiveItems().length - 1);
           existingStructureEntity.setMotherStructure(controlPanelUI.getMotherElement());
-          historyMem.coreHistory.push(historyMem.immutableArrayRetention(dataTranslator.getCoreStructureHolder()));
-          console.log('praseee');
           dataTranslator.rerenderPreview();
         }
       } else {

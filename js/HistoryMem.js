@@ -4,6 +4,8 @@ class HistoryMem {
       this.stepQueue = 1;
       this.queue = false;
       this.historyChanged = false;
+      this.historyPosition = null;
+      this.historyExcludePoint = false;
 
       //controlls
       this.nextVersionSubmit = null;
@@ -50,20 +52,70 @@ class HistoryMem {
       t.stepQueue++;
     }
 
+    catchCurrentHistoryPosition(position){
+      var t = this;
+      t.historyPosition = position;
+    }
+
+    getCurrentHistoryPosition(){
+      var t = this;
+      return t.historyPosition;
+    }
+
+    initHistoryPosition(coreHistory){
+      var t = this;
+      t.historyPosition = coreHistory.length - 1;
+    }
+
+    degHistoryPosition(){
+      var t = this;
+      t.historyPosition--;
+    }
+
+    degHistoryWithoutLast(){
+      var t = this;
+      t.historyPosition = t.historyPosition - 2;
+    }
+
+    incHistoryPosition(){
+      var t = this;
+      t.historyPosition++;
+    }
+
+    incHistoryWithoutLast(){
+      var t = this;
+      t.historyPosition = t.historyPosition + 2;
+    }
+
+    historyExclude(){
+      var t = this;
+      t.historyExcludePoint = true;
+    }
+
+    historyInclude(){
+      var t = this;
+      t.historyExcludePoint = false;
+    }
+
 
     prevVersion() {
       var t = this;
       t.prevVersionSubmit.on('click', function () {
-        if((dataTranslator.getCoreStructureHolder().length) > 0){
-          t.historyChanged = true;
-          var appCoreState = dataTranslator.getCoreStructureHolder();
-          var currentHistoryIndex = appCoreState.length - 1;
+        if((dataTranslator.getCoreStructureHolder().length) > 1){
+          // var appCoreState = dataTranslator.getCoreStructureHolder();
+          var currentHistoryIndex = t.getCurrentHistoryPosition() - 1;
           var historyStamp = t.getCoreHistory()[currentHistoryIndex - 1];
           var immunate = t.immunate(historyStamp);
           dataTranslator.coreStructureHolder = immunate;
+          t.degHistoryPosition();
+          t.historyExclude();
           dataTranslator.rerenderPreview();
         }
         else{
+          t.historyPosition = 0;
+          dataTranslator.clearCoreStructureHolder();
+          t.historyExclude();
+          dataTranslator.rerenderPreview();
           console.log('History core limit cant be set below 0');
         }
       });
@@ -72,12 +124,14 @@ class HistoryMem {
     nextVersion(){
       var t = this;
       t.nextVersionSubmit.on('click', function () {
-        if(t.getCoreHistory().length > dataTranslator.getCoreStructureHolder().length){
-          var appCoreState = dataTranslator.getCoreStructureHolder();
-          var currentHistoryIndex = appCoreState.length - 1;
-          var futureStamp = t.getCoreHistory()[currentHistoryIndex + 1];
-          var immunate = t.immunate(futureStamp);
+        if(t.getCoreHistory().length > t.getCurrentHistoryPosition()){
+          // var appCoreState = dataTranslator.getCoreStructureHolder();
+          var currentHistoryIndex = t.getCurrentHistoryPosition() - 1;
+          var historyStamp = t.getCoreHistory()[currentHistoryIndex + 1];
+          var immunate = t.immunate(historyStamp);
           dataTranslator.coreStructureHolder = immunate;
+          t.incHistoryPosition();
+          t.historyExclude();
           dataTranslator.rerenderPreview();
         }
         else{
@@ -116,7 +170,34 @@ class HistoryMem {
         return ([...array]);
     }
 
+    immutateSingleOne(item){
+      var t = this;
+      const iItem = item;
+      return iItem;
+    }
+
+    immutateWholeState(){
+      var t = this;
+      var iCoreStructureHolder = [];
+      for(let item of dataTranslator.coreStructureHolder){
+        const iItem = t.immutateSingleOne(item);
+        iCoreStructureHolder.push(iItem);
+      }
+      var immutate = t.immunate(iCoreStructureHolder);
+      dataTranslator.coreStructureHolder = immutate;
+      return immutate;
+    }
+
    immutablePush(arr, newEntry){
       return [ ...arr, newEntry ]
       }
+
+
+  coreStructureHolderImmunate(){
+    var t = this;
+    var coreStructureHolder = dataTranslator.getCoreStructureHolder();
+    var immunatedCoreStructureHolder = t.immunate(coreStructureHolder);
+    t.coreHistory.push(immunatedCoreStructureHolder);
   }
+
+}
